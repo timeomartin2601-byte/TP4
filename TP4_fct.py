@@ -28,7 +28,6 @@ boutton1 = Button( l, text= 'quitter', command= mw.destroy, bg = "snow").grid(ro
 
 
 
-
 for l in range (15) : 
     for c in range (8) : 
         canva.create_rectangle(20 + ( 100 * l ), 40 + ( 40 * c ), 110 + ( 100 * l ) , 70 + ( 40 * c ), fill="dark green")
@@ -36,3 +35,9 @@ for l in range (15) :
 
 
 mw.mainloop()
+
+
+
+
+
+#faire un classe palet 
