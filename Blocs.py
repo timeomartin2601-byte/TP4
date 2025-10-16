@@ -2,7 +2,7 @@
 Class Blocs
 Martin Timeo, Braz Arno
 09/10/25
-todo : affichage dans fichier principal
+todo : detection de collision ici ?
 '''
 import tkinter as tk
 
@@ -12,10 +12,10 @@ class Blocs:
         blocs : dictionnaire {coord: id_rectangle}
         """
         blocs = dict()
-        for l in range(15):
-            for c in range(8):
-                blocs[(20 + (100 * l), 30 + (40 * c))] = canvas.create_rectangle(20 + (100 * l), 30 + (40 * c),
-                                                                                110 + (100 * l), 60 + (40 * c),
+        for l in range(10):
+            for c in range(5):
+                blocs[(10 + (190 * l), 30 + (80 * c))] = canvas.create_rectangle(10 + (190 * l), 30 + (80 * c),
+                                                                                190 + (190 * l), 100 + (80 * c),
                                                                                 fill="blue")
         self.__blocs = blocs
 
@@ -27,6 +27,6 @@ class Blocs:
             canvas.delete(self.__blocs[coord])
             del self.__blocs[coord]  # Optionnel : on le retire du dict
 
-
+        
 
 
