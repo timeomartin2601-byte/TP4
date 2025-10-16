@@ -45,7 +45,10 @@ mw.bind("<Button-1>", destr)
 #Creation palet
 palet=pal.palet(canvas)
 
-mw.bind("KEY_LEFT", pal.palet.droite(canvas))
+def mouv_droite(event):
+    palet.droite()
+
+mw.bind("<Right>", mouv_droite)
 
 
 
