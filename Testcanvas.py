@@ -41,7 +41,7 @@ def destr(event):
 mw.bind("<Key>", on_key)
 mw.bind("<Button-1>", destr)
 
-
+    
 #Creation palet
 palet=pal.palet(canvas)
 
