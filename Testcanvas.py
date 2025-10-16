@@ -1,27 +1,32 @@
 import tkinter as tk
 
 
+# Création de la fenêtre
+
 mw = tk.Tk()
-mw.title("casse brique")
+mw.title("Casse Brique")
 mw.geometry('1920x1080')
+
+# Création du Canvas
 
 canvas = tk.Canvas(mw, bg='ivory')
 canvas.grid(row=0, column=0, ipadx=1920, ipady=1080)
 
 tk.Button(canvas, text="Quitter", command=mw.destroy).grid(row=0, column=2, ipadx=100, padx=750)
 
-l = tk.Label(canvas, text="Nbr vies :", bg="red")
+l = tk.Label(canvas, text="Nbr vies :", bg="red") # TODO Ajouter la var du nbr de vie 
 l.grid(row=0, column=0, ipadx=100, padx=0)
 
-l2 = tk.Label(canvas, text="Nbr vies :", bg="red")
+l2 = tk.Label(canvas, text="Nbr vies :", bg="red") # TODO Ajouter la var du nbr de vie 
 l2.grid(row=0, column=1, ipadx=100, padx=10)
 
 
+
+# Création des Blocs
 B = blc.Blocs(canvas)
 
 def on_key(event):
     if event.keysym == "space":
-        # Appelle la méthode cassage de ta classe
         B.cassage(canvas, coord=(220, 30))
     if event.keysym == "space" :
         canvas.move(blocs[(120, 30)], 300, 300)
