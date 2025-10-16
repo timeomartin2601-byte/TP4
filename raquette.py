@@ -4,10 +4,19 @@ class palet:
     def __init__(self, canvas):
         self.canvas = canvas
         self.palet = canvas.create_rectangle(710, 730, 820, 745, fill="black")
+        self.mur_d=820
+        self.mur_g=710
 
     def droite(self,canvas):
-        canvas.move(self.palet, 10, 0)        
-
+        if self.mur_d <1540:
+            canvas.move(self.palet, 10, 0)
+            self.mur_d+=10
+            self.mur_g+=10            
+            print(self.mur_d)
 
     def gauche(self,canvas):
-        canvas.move(self.palet, -10, 0)
+        if self.mur_g >0:
+            canvas.move(self.palet, -10, 0)
+            self.mur_g-=10
+            self.mur_d-=10
+            print(self.mur_g)
