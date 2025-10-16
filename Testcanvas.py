@@ -1,6 +1,7 @@
 import tkinter as tk
 import Blocs as blc
-import raquette as pal
+#import raquette as pal
+import Balle as bal
 
 # Création de la fenêtre
 
@@ -25,9 +26,11 @@ l2.grid(row=0, column=1, ipadx=100, padx=10)
 
 # Création des Blocs
 B = blc.Blocs(canvas)
+balle = bal.Balle(canvas)
 
 def on_key(event):
     if event.keysym == "space":
+        balle.deplacement(canvas)
         B.cassage(canvas, coord=(220, 30))
     if event.keysym == "space" :
         canvas.move(blocs[(120, 30)], 300, 300)
@@ -40,15 +43,16 @@ def destr(event):
 
 mw.bind("<Key>", on_key)
 mw.bind("<Button-1>", destr)
+    
 
     
-#Creation palet
-palet=pal.palet(canvas)
+# #Creation palet
+# palet=pal.palet(canvas)
 
-def mouv_droite(event):
-    palet.droite()
+# def mouv_droite(event):
+#     palet.droite()
 
-mw.bind("<Right>", mouv_droite)
+# mw.bind("<Right>", mouv_droite)
 
 
 
