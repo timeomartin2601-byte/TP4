@@ -28,6 +28,6 @@ class Blocs:
             canvas.delete(self._blocs[coord])
             del self._blocs[coord]  # Optionnel : on le retire du dict
 
-        
+
 
 
