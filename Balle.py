@@ -9,7 +9,7 @@ from random import randint
 
 class Balle : 
     def __init__(self, canvas):
-        self.__balle = canvas.create_oval(10, 10, fill = "red")
+        self.__balle = canvas.create_oval(760, 730, 770, 740, fill = "red")
         self.__vitx = -5
         self.__vity = -3
 
@@ -23,7 +23,6 @@ class Balle :
         if self.collision_hori(): # TODO collision -> Bool ? Coord ? les 2 ? Type de collision (latéral ou horizontal)
             self.__vity = -self.__vity
         
-
         
         self.__balle.move(self.__balle.coord()[0]  + self.__x, self.__balle.coord()[1]  + self.__y) 
 
@@ -32,7 +31,8 @@ class Balle :
         Detecte si il y a collision avec un bloc (ou la raquette) ou avec la bordure y = 0 (si y = 1080 : fin de la partie)
         Si la coord y de la balle est inférieur à y = 350 (blocs le + bas) : on appelle bloc de cassage (comment faire car autre class ?)
         '''
-        pass
+        if self.__balle.coord()[1] in (0, 1080):
+            
 
     def collision_lat(self):
         '''
