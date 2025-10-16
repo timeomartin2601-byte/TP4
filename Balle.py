@@ -22,7 +22,9 @@ class Balle :
         '''
         if self.collision_hori(canvas): # TODO collision -> Bool ? Coord ? les 2 ? Type de collision (latéral ou horizontal)
             self.__vitx = -self.__vitx
-        
+        if self.collision_hori(canvas): # TODO collision -> Bool ? Coord ? les 2 ? Type de collision (latéral ou horizontal)
+            self.__vity = -self.__vity
+
         canvas.move(self.__balle, self.__vitx, self.__vity) 
 
     def collision_hori(self, canvas):
@@ -30,11 +32,11 @@ class Balle :
         Detecte si il y a collision avec un bloc (ou la raquette) ou avec la bordure y = 0 (si y = 1080 : fin de la partie)
         Si la coord y de la balle est inférieur à y = 350 (blocs le + bas) : on appelle bloc de cassage (comment faire car autre class ?)
         '''
-        return canvas.coords(self.__balle)[1] == 700 or canvas.coords(self.__balle)[3] == 800 
+        return canvas.coords(self.__balle)[1] == 600 or canvas.coords(self.__balle)[3] == 900 
 
-    def collision_lat(self):
+    def collision_lat(self, canvas):
         '''
         Detecte si il y a collision avec un bloc (ou la raquette) ou avec l'une des bordures x = 0 ou x = 1920
         Si la coord y de la balle est inférieur à y = 350 (blocs le + bas) : on appelle bloc de cassage (comment faire car autre class?)
         '''
-        pass
+        return canvas.coords(self.__balle)[0] == 100
