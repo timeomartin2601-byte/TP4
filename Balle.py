@@ -20,11 +20,23 @@ class Balle :
                 - choisir une trajectoire de départ
                 - inversion du y à chaque collision (sauf si collision latéral)
         '''
-        if self.collision(): # TODO collision -> Bool ? Coord ? les 2 ? Type de collision (latéral)
+        if self.collision_hori(): # TODO collision -> Bool ? Coord ? les 2 ? Type de collision (latéral ou horizontal)
             self.__vity = -self.__vity
+        
 
         
         self.__balle.move(self.__balle.coord()[0]  + self.__x, self.__balle.coord()[1]  + self.__y) 
 
-    def collision(self):
+    def collision_hori(self):
+        '''
+        Detecte si il y a collision avec un bloc (ou la raquette) ou avec la bordure y = 0 (si y = 1080 : fin de la partie)
+        Si la coord y de la balle est inférieur à y = 350 (blocs le + bas) : on appelle bloc de cassage (comment faire car autre class ?)
+        '''
+        pass
+
+    def collision_lat(self):
+        '''
+        Detecte si il y a collision avec un bloc (ou la raquette) ou avec l'une des bordures x = 0 ou x = 1920
+        Si la coord y de la balle est inférieur à y = 350 (blocs le + bas) : on appelle bloc de cassage (comment faire car autre class?)
+        '''
         pass
