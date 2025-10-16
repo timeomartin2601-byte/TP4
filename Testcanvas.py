@@ -15,6 +15,7 @@ except Exception:
 mw = tk.Tk()
 mw.title("Casse Brique")
 mw.geometry('1920x1080')
+mw.attributes('-fullscreen', True)
 
 # Création du Canvas
 
