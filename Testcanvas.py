@@ -38,17 +38,20 @@ def destr(event):
     for rectangle in rect:
         canvas.delete(rectangle)
 
-mw.bind("<Key>", on_key)
-mw.bind("<Button-1>", destr)
+# mw.bind("<Key>", on_key)
+# mw.bind("<Button-1>", destr)
 
     
 #Creation palet
 palet=pal.palet(canvas)
 
-def mouv_droite(event):
-    palet.droite()
+def mouv(event):
+    if event.keysym == "Right":
+        palet.droite(canvas)
+    if event.keysym == "Left":
+        palet.gauche(canvas)
 
-mw.bind("<Right>", mouv_droite)
+mw.bind("<Key>", mouv)
 
 
 
