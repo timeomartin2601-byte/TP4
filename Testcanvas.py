@@ -1,5 +1,6 @@
 import tkinter as tk
 import Blocs as blc
+import raquette as pal
 
 # Création de la fenêtre
 
@@ -20,12 +21,17 @@ l.grid(row=0, column=0, ipadx=100, padx=0)
 l2 = tk.Label(canvas, text="Nbr vies :", bg="red") # TODO Ajouter la var du nbr de vie 
 l2.grid(row=0, column=1, ipadx=100, padx=10)
 
+
+
 # Création des Blocs
 B = blc.Blocs(canvas)
 
 def on_key(event):
     if event.keysym == "space":
         B.cassage(canvas, coord=(220, 30))
+    if event.keysym == "space" :
+        canvas.move(blocs[(120, 30)], 300, 300)
+        canvas.delete(blocs[(220, 30)])
 
 def destr(event):
     rect = canvas.find_overlapping(event.x, event.y, event.x, event.y)
@@ -34,4 +40,13 @@ def destr(event):
 
 mw.bind("<Key>", on_key)
 mw.bind("<Button-1>", destr)
+
+
+#Creation palet
+palet=pal.palet(canvas)
+
+mw.bind("KEY_LEFT", pal.palet.droite(canvas))
+
+
+
 tk.mainloop()
