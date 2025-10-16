@@ -1,5 +1,6 @@
 import tkinter as tk
-
+import Blocs as blc
+import raquette as pal
 
 # Création de la fenêtre
 
@@ -39,4 +40,13 @@ def destr(event):
 
 mw.bind("<Key>", on_key)
 mw.bind("<Button-1>", destr)
+
+
+#Creation palet
+palet=pal.palet(canvas)
+
+mw.bind("KEY_LEFT", pal.palet.droite(canvas))
+
+
+
 tk.mainloop()
