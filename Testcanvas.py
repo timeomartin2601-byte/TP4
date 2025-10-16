@@ -1,5 +1,5 @@
 import tkinter as tk
-import Blocs as blc
+
 
 mw = tk.Tk()
 mw.title("casse brique")
@@ -16,23 +16,16 @@ l.grid(row=0, column=0, ipadx=100, padx=0)
 l2 = tk.Label(canvas, text="Nbr vies :", bg="red")
 l2.grid(row=0, column=1, ipadx=100, padx=10)
 
-# Création des blocs
-# blocs = dict()
-# for l in range(15):
-#     for c in range(8):
-#         blocs[(20 + (100 * l), 30 + (40 * c))] = canvas.create_rectangle(
-#             20 + (100 * l), 30 + (40 * c),
-#             110 + (100 * l), 60 + (40 * c),
-#             fill="blue"
-#         )
 
-# Création de ton gestionnaire de blocs
 B = blc.Blocs(canvas)
 
 def on_key(event):
     if event.keysym == "space":
         # Appelle la méthode cassage de ta classe
         B.cassage(canvas, coord=(220, 30))
+    if event.keysym == "space" :
+        canvas.move(blocs[(120, 30)], 300, 300)
+        canvas.delete(blocs[(220, 30)])
 
 def destr(event):
     rect = canvas.find_overlapping(event.x, event.y, event.x, event.y)
