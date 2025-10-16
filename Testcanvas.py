@@ -7,10 +7,11 @@ import raquette as pal
 mw = tk.Tk()
 mw.title("Casse Brique")
 mw.geometry('1920x1080')
+mw.attributes('-fullscreen', True)
 
 # Création du Canvas
 
-canvas = tk.Canvas(mw, bg='ivory')
+canvas = tk.Canvas(mw, bg='ivory',width=1920, height=1080)
 canvas.grid(row=0, column=0, ipadx=1920, ipady=1080)
 
 tk.Button(canvas, text="Quitter", command=mw.destroy).grid(row=0, column=2, ipadx=100, padx=750)
