@@ -1,6 +1,6 @@
 import tkinter as tk
 import Blocs as blc
-#import raquette as pal
+import raquette as pal
 import Balle as bal
 
 try:
@@ -15,6 +15,7 @@ except Exception:
 mw = tk.Tk()
 mw.title("Casse Brique")
 mw.geometry('1920x1080')
+mw.attributes('-fullscreen', True)
 
 # Création du Canvas
 
@@ -56,13 +57,16 @@ mw.bind("<Button-1>", destr)
     
 
     
-# #Creation palet
-# palet=pal.palet(canvas)
+#Creation palet
+palet=pal.palet(canvas)
 
-# def mouv_droite(event):
-#     palet.droite()
+def mouv(event):
+    if event.keysym == "Right":
+        palet.droite(canvas)
+    if event.keysym == "Left":
+        palet.gauche(canvas)
 
-# mw.bind("<Right>", mouv_droite)
+mw.bind("<Key>", mouv)
 
 mw.resizable(False, False)
 
