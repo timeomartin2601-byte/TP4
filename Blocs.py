@@ -2,7 +2,7 @@
 Class Blocs
 Martin Timeo, Braz Arno
 09/10/25
-todo : detection de collision ici ?
+todo : detection de collision ici -> non
 '''
 import tkinter as tk
 
@@ -25,7 +25,7 @@ class Blocs:
         """
         if coord in self._blocs:
             canvas.delete(self.__blocs[coord])
-            del self.__blocs[coord]  # Optionnel : on le retire du dict
+            del self.__blocs[coord]  # Optionnel : on le retire du dict 
 
         
 

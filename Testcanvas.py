@@ -21,10 +21,10 @@ mw.attributes('-fullscreen', True)
 
 canvas = tk.Canvas(mw, bg='ivory', width=1920, height=1080)
 canvas.grid(row=0, column=0, ipadx=1920, ipady=1080)
-bord_g = canvas.create_line(0, 0, 0, 1080, width=5, fill='red')
-bord_d = canvas.create_line(1920, 0, 1920, 1080, width=5, fill='red')
+# bord_g = canvas.create_line(0, 0, 0, 1080, width=10, fill='red')
+# bord_d = canvas.create_line(1920, 0, 1920, 1080, width=10, fill='red')
 
-tk.Button(canvas, text="Quitter", command=mw.destroy).grid(row=0, column=2, ipadx=100, padx=750)
+tk.Button(canvas, text="Quitter", command=mw.destroy).grid(row=0, column=2, ipadx=100, padx=1150)
 
 l = tk.Label(canvas, text="Nbr vies :", bg="red") # TODO Ajouter la var du nbr de vie 
 l.grid(row=0, column=0, ipadx=100, padx=0)
@@ -57,14 +57,17 @@ mw.bind("<Button-1>", destr)
     
 
     
-#Creation palet
+# Creation palet et balle
 palet=pal.palet(canvas)
+# balle = bal.Balle(canvas)
 
 def mouv(event):
     if event.keysym == "Right":
         palet.droite(canvas)
     if event.keysym == "Left":
         palet.gauche(canvas)
+    if event.keysym == 'l':
+        balle.deplacement(canvas)
 
 mw.bind("<Key>", mouv)
 

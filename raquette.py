@@ -8,7 +8,7 @@ class palet:
         self.mur_g=710
 
     def droite(self,canvas):
-        if self.mur_d <1540:
+        if self.mur_d <1920:
             canvas.move(self.palet, 10, 0)
             self.mur_d+=10
             self.mur_g+=10            
