@@ -3,7 +3,7 @@ import tkinter as tk
 class palet:
     def __init__(self, canvas):
         self.canvas = canvas
-        self.palet = canvas.create_rectangle(710, 730, 820, 745, fill="black")
+        self.palet = canvas.create_rectangle(710, 930, 820, 945, fill="black")
         self.mur_d=820
         self.mur_g=710
 

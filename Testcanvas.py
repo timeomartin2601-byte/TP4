@@ -67,7 +67,9 @@ def mouv(event):
     if event.keysym == "Left":
         palet.gauche(canvas)
     if event.keysym == 'l':
-        balle.deplacement(canvas)
+        a = balle.deplacement(canvas)
+        if a not in (0, 51):
+            B.cassage(canvas, a)
 
 mw.bind("<Key>", mouv)
 
