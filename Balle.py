@@ -2,65 +2,82 @@
 Class Balle
 Martin Timeo, Braz Arno
 09/10/25
-TODO : Detecter les collisions latérales 
+TODO : Fin du jeu pour y = 1080 et option de jeu sur les paramètres de vitesse
 '''
 import tkinter as tk
-
 # from random import randint
 
 class Balle : 
-    def __init__(self, canvas):
-        self.__balle = canvas.create_oval(940, 710, 980, 750, fill = "red") # id 51
-        print(self.__balle)
-        self.__xmin, self.__ymin, self.__xmax, self.__ymax = canvas.coords(self.__balle)
+    def __init__(self, canvas, x=940, y=710, diametre=40):
+        '''
+        Création de la balle, sauvegarde de son identifiant, création de ses paramètres coordonnées et vitesse (Par défaut : balle 40x40 px)
+        TODO : vitesse croissante et initialisation aléatoire par exemple
+        '''
+        self.__balle = canvas.create_oval(x, y, x+diametre, y+diametre, fill = "red")
+        self.__rayon = diametre/2
+        self.__x0, self.__y0, self.__x1, self.__y1 = canvas.coords(self.__balle)
         self.__vitx = -10
         self.__vity = -10
 
     def deplacement(self, canvas):
         '''
         Gére le déplacement de la balle, vérifie si il y a collision et réagis en conséquence
-        Sortie : int, l'id_rectangle si il y a collision sinon 0
-        TODO :  - définir la délimitation de l'aire de jeu 
-                - choisir une trajectoire de départ
-                - inversion du y à chaque collision (sauf si collision latéral)
+        Gestion :   - définir la délimitation de l'aire de jeu 
+                    - inversion du x, y ou les 2 en fonction de la collision
+        Sortie : int, l'identifiant de l'objet collisionné sinon 0
         '''
-        sortie = 0
-        self.__xmin, self.__ymin, self.__xmax, self.__ymax = canvas.coords(self.__balle)
+        id_bloc = 0
+        self.__x0, self.__y0, self.__x1, self.__y1 = canvas.coords(self.__balle)
+        
 
-        id_hori = self.collision_hori(canvas)
-        if id_hori > 0 : 
+        haut = self.collision(canvas, (self.__x0+self.__x1)/2, self.__y0, (self.__x0+self.__x1)/2, self.__y0)
+        bas = self.collision(canvas, (self.__x0+self.__x1)/2, self.__y1, (self.__x0+self.__x1)/2, self.__y1)
+        if (haut + bas > 0 ) or self.collision_hori(canvas) : 
             self.__vity = -self.__vity
-            sortie = id_hori
+            id_bloc = haut + bas
 
-        id_lat = self.collision_lat(canvas)
-        if id_lat > 0: 
+        gauche = self.collision(canvas, self.__x0, (self.__y0+self.__y1)/2, self.__x0, (self.__y0+self.__y1)/2)
+        droite = self.collision(canvas, self.__x1, (self.__y0+self.__y1)/2, self.__x1, (self.__y0+self.__y1)/2)
+        if (gauche + droite > 0) or self.collision_lat(canvas) : 
             self.__vitx = -self.__vitx
-            sortie = id_lat
+            id_bloc = gauche + droite
+
+        # centre_balle = (self.__x0+self.__x1)/2 
+        # diag1 = self.collision(canvas, centre_balle-self.__rayon, centre_balle+self.__rayon, centre_balle+self.__rayon, centre_balle-self.__rayon)
+        # diag2 = self.collision(canvas, centre_balle-self.__rayon, centre_balle-self.__rayon, centre_balle+self.__rayon, centre_balle+self.__rayon)
+        # if (diag1 + diag2 > 0) : 
+        #     print('les diags', diag1, diag2)
+        #     self.__vitx, self.__vity = -self.__vitx, -self.__vity
+        #     id_bloc = gauche + droite
 
         canvas.move(self.__balle, self.__vitx, self.__vity) 
-        if sortie > 0:
-            print(sortie)
-        return sortie
-
+        return id_bloc
+    
     def collision_hori(self, canvas):
         '''
-        Detecte si il y a collision avec un bloc (ou la raquette) ou avec la bordure y = 0 (TODO si y = 1080 : fin de la partie)
-        Si la coord y de la balle est inférieur à y = 350 (blocs le + bas) : on appelle bloc de cassage (comment faire car autre class ?)
-        Sortie : int, l'id_rectangle (0 si il n'y a pas de collision 0 n'étant pas un id valide)   
+        Detecte si il y a collision avec un bloc (ou la raquette) ou avec la bordure y = 0 (TODO si y = 1080 : fin de la partie) 
+        Sortie : bool, True si il y a eu collision False sinon 
         '''
-        overlap = canvas.find_overlapping(self.__xmin, self.__ymin, self.__xmin, self.__ymin)
-        if overlap != tuple() : 
-            # print('sans', canvas.find_overlapping(self.__xmin, self.__ymin, self.__xmin, self.__ymin))
-            # print('avec', canvas.find_overlapping(self.__xmin, self.__ymin, self.__xmax, self.__ymax))
-            return overlap[0]
-        return int(self.__ymin == 0 or self.__ymax == 1080)
+        return self.__y0 == 0 or self.__y1 == 1080
 
     def collision_lat(self, canvas):
         '''
-        Detecte si il y a collision avec un bloc (ou la raquette) ou avec l'une des bordures x = 0 ou x = 1920
-        Si la coord y de la balle est inférieur à y = 350 (blocs le + bas) : on appelle bloc de cassage (comment faire car autre class?)
+        Detecte si il y a collision avec l'une des bordures x = 0 ou x = 1920
+        Sortie : bool, True si il y a eu collision False sinon 
         '''
-        overlap = canvas.find_overlapping(self.__xmin, self.__ymin, self.__xmin, self.__ymin)
-        # if overlap != tuple() :
-        #     return overlap[0]
-        return int(self.__xmin == 0 or self.__xmax == 1920)
+        return self.__x0 == 0 or self.__x1 == 1920
+    
+    def collision(self, canvas, x1, y1, x2, y2):
+        '''
+        Detecte si il y a collision avec l'une des bordures x = 0 ou x = 1920
+        Sortie : int, id de l'objet collisionné (0 sinon) 
+        TODO : Possibilité de toucher plusieurs objets en même temps
+        '''
+        overlap = canvas.find_overlapping(x1, y1, x2, y2)
+        if overlap != tuple() and 52 in overlap: 
+            print(overlap)
+        if overlap != tuple():
+            for id_obj in overlap:
+                if id_obj != self.__balle:
+                    return id_obj
+        return 0
