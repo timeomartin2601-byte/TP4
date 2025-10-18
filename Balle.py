@@ -42,8 +42,11 @@ class Balle :
             self.__vitx = -self.__vitx
             id_bloc = gauche + droite
 
-        canvas.move(self.__balle, self.__vitx, self.__vity) 
-        return id_bloc
+        if not self.arret(canvas):
+            canvas.move(self.__balle, self.__vitx, self.__vity) 
+            return id_bloc
+        else:
+            return -1 #TODO
     
     def collision_hori(self, canvas):
         '''
