@@ -42,10 +42,7 @@ balle = bal.Balle(canvas)
 def on_key(event):
     if event.keysym == "space":
         balle.deplacement(canvas)
-        B.cassage(canvas, coord=(220, 30))
-    if event.keysym == "space" :
-        canvas.move(blocs[(120, 30)], 300, 300)
-        canvas.delete(blocs[(220, 30)])
+        B.cassage(canvas, 24)
 
 def destr(event):
     rect = canvas.find_overlapping(event.x, event.y, event.x, event.y)
@@ -68,8 +65,7 @@ def mouv(event):
         palet.gauche(canvas)
     if event.keysym == 'l':
         a = balle.deplacement(canvas)
-        if a not in (0, 51):
-            B.cassage(canvas, a)
+        B.cassage(canvas, a)
 
 mw.bind("<Key>", mouv)
 

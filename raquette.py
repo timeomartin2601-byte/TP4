@@ -12,11 +12,11 @@ class palet:
             canvas.move(self.palet, 10, 0)
             self.mur_d+=10
             self.mur_g+=10            
-            print(self.mur_d)
+            # print(self.mur_d)
 
     def gauche(self,canvas):
         if self.mur_g >0:
             canvas.move(self.palet, -10, 0)
             self.mur_g-=10
             self.mur_d-=10
-            print(self.mur_g)
+            # print(self.mur_g)

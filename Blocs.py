@@ -9,7 +9,7 @@ import tkinter as tk
 class Blocs:
     def __init__(self, canvas): #, blocs: dict):
         """
-        blocs : dictionnaire {coord: id_rectangle} -> inutile enft 
+        blocs : list, l'entièreté des identifiants des blocs
         """
         # blocs = dict()
         blocs = list()
@@ -25,13 +25,11 @@ class Blocs:
 
     def cassage(self, canvas, id_rect : int):
         """
-        Supprime un bloc sur le canvas à partir de ses coordonnées-clé -> justement on va se servir de l'inverse
+        Supprime un bloc sur le canvas à partir de son identifiant et le supprime de la liste des blocs
         """
-        # for clef, valeur in self.__blocs.items():
-        #     if valeur == id_rect:
-        #         canvas.delete(self.__blocs[clef])
-        #         del self.__blocs[clef]  
-        canvas.delete(id_rect)
+        if id_rect in self.__blocs :
+            canvas.delete(id_rect)
+            self.__blocs.remove(id_rect)
 
         
 
