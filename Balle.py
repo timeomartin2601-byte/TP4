@@ -2,7 +2,7 @@
 Class Balle
 Martin Timeo, Braz Arno
 09/10/25
-TODO : Fin du jeu pour y = 1080 et option de jeu sur les paramètres de vitesse
+TODO : Collisions diagonales + Fin du jeu pour y = 1080 (+ option de jeu sur les paramètres de vitesse)
 '''
 import tkinter as tk
 # from random import randint
@@ -50,7 +50,10 @@ class Balle :
         Detecte si il y a collision avec un bloc (ou la raquette) ou avec la bordure y = 0 (TODO si y = 1080 : fin de la partie) 
         Sortie : bool, True si il y a eu collision False sinon 
         '''
-        return self.__y0 == 0 or self.__y1 == 1080
+        if self.__y1 == 1080:
+            self.del_balle(canvas)
+            return True
+        return self.__y0 == 0 
 
     def collision_lat(self, canvas):
         '''
@@ -66,8 +69,6 @@ class Balle :
         TODO : Possibilité de toucher plusieurs objets en même temps
         '''
         overlap = canvas.find_overlapping(x1, y1, x2, y2)
-        if overlap != tuple() and 52 in overlap: 
-            print(overlap)
         if overlap != tuple():
             for id_obj in overlap:
                 if id_obj != self.__balle:

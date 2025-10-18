@@ -1,6 +1,6 @@
 import tkinter as tk
 import Blocs as blc
-import raquette as pal
+import Raquette as pal
 import Balle as bal
 
 try:
