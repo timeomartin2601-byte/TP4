@@ -63,13 +63,12 @@ def mouv(event):
         palet.droite(canvas)
     if event.keysym == "Left":
         palet.gauche(canvas)
-    if event.keysym == 'l':
-        a = balle.deplacement(canvas)
-        B.cassage(canvas, a)
+
+    a = balle.deplacement(canvas)
+    B.cassage(canvas, a)
 
 mw.bind("<Key>", mouv)
 
 mw.resizable(False, False)
-
 
 tk.mainloop()
