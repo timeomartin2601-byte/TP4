@@ -26,8 +26,8 @@ mw.attributes('-fullscreen', True)
 
 canvas = tk.Canvas(mw, bg='ivory', width=1920, height=1080)
 canvas.grid(row=0, column=0, ipadx=1920, ipady=1080)
-# bord_g = canvas.create_line(0, 0, 0, 1080, width=10, fill='red')
-# bord_d = canvas.create_line(1920, 0, 1920, 1080, width=10, fill='red')
+# bord_g = canvas.create_line(0, 0, 0, 1060, width=50, fill='blue')
+# bord_d = canvas.create_line(1920, 0, 1920, 1060, width=50, fill='blue')
 
 tk.Button(canvas, text="Quitter", command=mw.destroy).grid(row=0, column=2, ipadx=100, padx=1150)
 

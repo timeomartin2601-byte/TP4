@@ -7,7 +7,7 @@ TODO : Collisions diagonales + Fin du jeu pour y = 1080 (+ option de jeu sur les
 import tkinter as tk
 # from random import randint
 
-class Balle : 
+class balle : 
     def __init__(self, canvas, x=940, y=710, diametre=40): 
         '''
         Création de la balle, sauvegarde de son identifiant, création de ses paramètres coordonnées et vitesse (Par défaut : balle 40x40 px)
