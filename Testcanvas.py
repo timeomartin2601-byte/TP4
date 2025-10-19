@@ -56,7 +56,16 @@ mw.bind("<Button-1>", destr)
     
 # Creation palet et balle
 palet=pal.palet(canvas)
-# balle = bal.Balle(canvas)
+
+
+def jeu():
+    id_bloc = balle.deplacement(canvas)
+    if id_bloc == -1:
+        retry = tk.messagebox.askyesno(message='Game Over !')
+        return
+    else:
+        B.cassage(canvas, id_bloc)
+    jeu()
 
 def mouv(event):
     if event.keysym == "Right":
@@ -64,11 +73,11 @@ def mouv(event):
     if event.keysym == "Left":
         palet.gauche(canvas)
 
-    a = balle.deplacement(canvas)
-    B.cassage(canvas, a)
-
 mw.bind("<Key>", mouv)
 
 mw.resizable(False, False)
+
+balle = bal.Balle(canvas)
+jeu()
 
 tk.mainloop()
