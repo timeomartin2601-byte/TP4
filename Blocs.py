@@ -7,8 +7,9 @@ TODO : Gerer l'état des blocs (pour + de difficulté)
 import tkinter as tk
 
 class Blocs:
-    def __init__(self, canvas): 
+    def __init__(self, canvas, etat): 
         """
+        Entrée : etat - int, réglable de 1 à 3 nombre de coups pour casser un bloc
         blocs : list, l'entièreté des identifiants des blocs 
         TODO revenir sur un dict avec pour val l'état ?  ex. id_bloc : etat
         """
@@ -16,7 +17,7 @@ class Blocs:
         # blocs = list()
         for l in range(10):
             for c in range(5):
-                blocs[canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue")] = 3 
+                blocs[canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue")] = etat 
                 # TODO Avec dict on pourrait mettre en val l'état
                 # blocs.append(canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue"))
         self.__blocs = blocs
