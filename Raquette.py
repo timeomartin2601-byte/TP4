@@ -19,9 +19,9 @@ class palet:
         Déplace la raquette à droite à chaque pression de la flèche droite
         '''
         if self.mur_d <1920:
-            canvas.move(self.palet, 10, 0)
-            self.mur_d+=10
-            self.mur_g+=10            
+            canvas.move(self.palet, 20, 0)
+            self.mur_d+=20
+            self.mur_g+=20            
             # print(self.mur_d)
 
     def gauche(self, canvas):
@@ -29,7 +29,7 @@ class palet:
         Déplace la raquette à gauche à chaque pression de la flèche gauche
         '''
         if self.mur_g >0:
-            canvas.move(self.palet, -10, 0)
-            self.mur_g-=10
-            self.mur_d-=10
+            canvas.move(self.palet, -20, 0)
+            self.mur_g-=20
+            self.mur_d-=20
             # print(self.mur_g)
