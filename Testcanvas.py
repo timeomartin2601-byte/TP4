@@ -2,6 +2,7 @@ import tkinter as tk
 import Blocs as blc
 import Raquette as pal
 import Balle as bal
+from tkinter import messagebox
 
 try:
     from ctypes import windll
@@ -61,11 +62,11 @@ palet=pal.palet(canvas)
 def jeu():
     id_bloc = balle.deplacement(canvas)
     if id_bloc == -1:
-        retry = tk.messagebox.askyesno(message='Game Over !')
+        retry = messagebox.askyesno(message='Game Over !')
         return
     else:
         B.cassage(canvas, id_bloc)
-    jeu()
+    mw.after(20, jeu)
 
 def mouv(event):
     if event.keysym == "Right":
@@ -77,7 +78,7 @@ mw.bind("<Key>", mouv)
 
 mw.resizable(False, False)
 
-balle = bal.Balle(canvas)
+# balle = bal.Balle(canvas)
 jeu()
 
 tk.mainloop()
