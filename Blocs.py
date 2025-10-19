@@ -31,6 +31,7 @@ class blocs:
                 canvas.delete(id_rect)
                 del self.__blocs[id_rect]        
 
-        
+    def vide(self):
+        return self.__blocs == {}
 
 

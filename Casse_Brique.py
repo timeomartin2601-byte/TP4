@@ -11,8 +11,9 @@ TODO :  - assembler les différentes classes ensemble
 
 import tkinter as tk
 import Blocs
-import Balle
+import Copie_Balle
 import Raquette 
+from tkinter import messagebox
 
 # Création de la fenêtre tkinter 
 
@@ -35,11 +36,18 @@ btn_close.pack(side='right')
 canvas = tk.Canvas(frame_canvas, bg='light grey', width=1920, height=1060)
 canvas.pack(fill='both')
 
+canvas.create_line(0, 0, 1920, 0, fill='green', width=10)
+canvas.create_line(0, 0, 0, 1060, fill='green', width=10)
+canvas.create_line(1920, 0, 1920, 1060, fill='green', width=10)
+
+canvas.create_line(0, 1050, 1920, 1050, fill='red', width=10)
+
 # TODO Création d'un menu (button etc)
+
 
 # Création des objets 
 raquette = Raquette.palet(canvas)
-balle = Balle.balle(canvas)
+balle = Copie_Balle.balle(canvas)
 blocs = Blocs.blocs(canvas)
 
 # Programme Principal
@@ -49,6 +57,23 @@ def mouvement(event):
         raquette.gauche(canvas)
     if event.keysym == 'Right':
         raquette.droite(canvas)
+
+def jeu():
+    if blocs.vide():
+        messagebox.showinfo(message='Bravo!')
+        return
+
+    idbloc = balle.id_col(canvas)
+    if idbloc == -1:
+        balle.del_balle(canvas)
+        window.destroy()
+        #TODO
+    else:
+        blocs.cassage(canvas, idbloc)
+        balle.deplacement(canvas)
+        window.after(20, jeu)
+
+jeu()
 
 window.bind("<Key>", mouvement)
 tk.mainloop()

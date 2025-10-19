@@ -19,7 +19,7 @@ class balle :
         self.__vitx = -10
         self.__vity = -10
 
-    def deplacement(self, canvas):
+    def id_col(self, canvas):
         '''
         Gére le déplacement de la balle, vérifie si il y a collision et réagis en conséquence
         Gestion :   - définir la délimitation de l'aire de jeu 
@@ -27,43 +27,39 @@ class balle :
         Sortie : int, l'identifiant de l'objet collisionné sinon 0
         TODO : Gestion des collisions diagonales 
         '''
+        if self.perdu(canvas):
+            return -1
+
         id_bloc = 0
         self.__x0, self.__y0, self.__x1, self.__y1 = canvas.coords(self.__balle)
         
         haut = self.collision(canvas, (self.__x0+self.__x1)/2, self.__y0, (self.__x0+self.__x1)/2, self.__y0)
         bas = self.collision(canvas, (self.__x0+self.__x1)/2, self.__y1, (self.__x0+self.__x1)/2, self.__y1)
-        if (haut + bas > 0 ) or self.collision_hori(canvas) : 
+        if (haut + bas) > 0  :
             self.__vity = -self.__vity
             id_bloc = haut + bas
 
         gauche = self.collision(canvas, self.__x0, (self.__y0+self.__y1)/2, self.__x0, (self.__y0+self.__y1)/2)
         droite = self.collision(canvas, self.__x1, (self.__y0+self.__y1)/2, self.__x1, (self.__y0+self.__y1)/2)
-        if (gauche + droite > 0) or self.collision_lat(canvas) : 
+        if (gauche + droite) > 0 :
             self.__vitx = -self.__vitx
             id_bloc = gauche + droite
 
+        return id_bloc
+        
+    def deplacement(self, canvas):
         if not self.arret(canvas):
-            canvas.move(self.__balle, self.__vitx, self.__vity) 
-            return id_bloc
-        else:
-            return -1 #TODO
+            canvas.move(self.__balle, self.__vitx, self.__vity)
     
-    def collision_hori(self, canvas):
+    def perdu(self, canvas):
         '''
         Detecte si il y a collision avec un bloc (ou la raquette) ou avec la bordure y = 0 (TODO si y = 1080 : fin de la partie) 
         Sortie : bool, True si il y a eu collision False sinon 
         '''
-        if self.__y1 == 1080:
+        if self.__y1 == 1060:
             self.del_balle(canvas)
             return True
-        return self.__y0 == 0 
-
-    def collision_lat(self, canvas):
-        '''
-        Detecte si il y a collision avec l'une des bordures x = 0 ou x = 1920
-        Sortie : bool, True si il y a eu collision False sinon 
-        '''
-        return self.__x0 == 0 or self.__x1 == 1920
+        return False
     
     def collision(self, canvas, x1, y1, x2, y2):
         '''
