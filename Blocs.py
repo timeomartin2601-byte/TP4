@@ -2,7 +2,6 @@
 Class Blocs
 Martin Timeo, Braz Arno
 09/10/25
-TODO : Gerer l'état des blocs (pour + de difficulté)
 '''
 import tkinter as tk
 
@@ -11,7 +10,6 @@ class Blocs:
         """
         Entrée : etat - int, réglable de 1 à 3 nombre de coups pour casser un bloc
         blocs : list, l'entièreté des identifiants des blocs 
-        TODO revenir sur un dict avec pour val l'état ?  ex. id_bloc : etat
         """
         blocs = dict()
         for l in range(10):
@@ -21,8 +19,7 @@ class Blocs:
 
     def cassage(self, canvas, id_rect : int):
         """
-        Supprime un bloc sur le canvas à partir de son identifiant et le supprime de la liste des blocs 
-        TODO si etat == 2 : chgt couleur en orange, si etat == 1 : chgt couleur en rouge, si etat == 0 : destruction du bloc
+        Supprime un bloc sur le canvas à partir de son identifiant et le supprime de la liste des blocs
         """
         couleurs = [None, 'red', 'orange']
         if id_rect in self.__blocs :
