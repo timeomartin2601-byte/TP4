@@ -10,26 +10,32 @@ class Blocs:
     def __init__(self, canvas): 
         """
         blocs : list, l'entièreté des identifiants des blocs 
-        TODO revenir sur un dict avec pour val l'état ?
+        TODO revenir sur un dict avec pour val l'état ?  ex. id_bloc : etat
         """
-        # blocs = dict()
-        blocs = list()
+        blocs = dict()
+        # blocs = list()
         for l in range(10):
             for c in range(5):
-                #blocs[canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue")] = (10 + (190 * l), 30 + (80 * c)) 
+                blocs[canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue")] = 3 
                 # TODO Avec dict on pourrait mettre en val l'état
-                blocs.append(canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue"))
+                # blocs.append(canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue"))
         self.__blocs = blocs
-        # print(self.__blocs) 
 
     def cassage(self, canvas, id_rect : int):
         """
         Supprime un bloc sur le canvas à partir de son identifiant et le supprime de la liste des blocs 
-        TODO prévoir potentiel changement en csq
+        TODO si etat == 2 : chgt couleur en orange, si etat == 1 : chgt couleur en rouge, si etat == 0 : destruction du bloc
         """
+        couleurs = [None, 'red', 'orange']
         if id_rect in self.__blocs :
-            canvas.delete(id_rect)
-            self.__blocs.remove(id_rect)
+            self.__blocs[id_rect] -= 1
+            etat = self.__blocs[id_rect]
+            if etat > 0:
+                canvas.itemconfig(id_rect, fill=couleurs[etat])
+            else:
+                canvas.delete(id_rect)
+                del self.__blocs[id_rect]        
+        # self.__blocs.remove(id_rect)  # Version avec list
 
         
 
