@@ -14,7 +14,6 @@ class Blocs:
         TODO revenir sur un dict avec pour val l'état ?  ex. id_bloc : etat
         """
         blocs = dict()
-        # blocs = list()
         for l in range(10):
             for c in range(5):
                 blocs[canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue")] = etat 
