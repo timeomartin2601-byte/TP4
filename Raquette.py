@@ -2,7 +2,6 @@
 Class Raquette
 Martin Timeo, Braz Arno
 09/10/25
-TODO : Faire les docs des fonctions
 '''
 import tkinter as tk
 
