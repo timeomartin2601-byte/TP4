@@ -18,8 +18,6 @@ class Blocs:
         for l in range(10):
             for c in range(5):
                 blocs[canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue")] = etat 
-                # TODO Avec dict on pourrait mettre en val l'état
-                # blocs.append(canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue"))
         self.__blocs = blocs
 
     def cassage(self, canvas, id_rect : int):
@@ -36,7 +34,6 @@ class Blocs:
             else:
                 canvas.delete(id_rect)
                 del self.__blocs[id_rect]        
-        # self.__blocs.remove(id_rect)  # Version avec list
 
         
 
