@@ -8,7 +8,7 @@ import tkinter as tk
 from random import randint
 
 class balle : 
-    def __init__(self, canvas, x=940, y=710, diametre=40): 
+    def __init__(self, canvas, x=330, y=380, diametre=40): 
         '''
         Création de la balle, sauvegarde de son identifiant, création de ses paramètres coordonnées et vitesse (Par défaut : balle 40x40 px)
         TODO : vitesse croissante et initialisation aléatoire par exemple
@@ -30,21 +30,22 @@ class balle :
         if self.perdu(canvas):
             return -1
 
-        id_bloc = 0
+        id_bloc = []
         self.__x0, self.__y0, self.__x1, self.__y1 = canvas.coords(self.__balle)
         
         haut = self.collision(canvas, (self.__x0+self.__x1)/2, self.__y0, (self.__x0+self.__x1)/2, self.__y0)
         bas = self.collision(canvas, (self.__x0+self.__x1)/2, self.__y1, (self.__x0+self.__x1)/2, self.__y1)
-        if (haut + bas) > 0  :
+        if len(haut + bas)>0:
             self.__vity = -self.__vity
-            id_bloc = haut + bas
+            id_bloc += haut + bas
 
         gauche = self.collision(canvas, self.__x0, (self.__y0+self.__y1)/2, self.__x0, (self.__y0+self.__y1)/2)
         droite = self.collision(canvas, self.__x1, (self.__y0+self.__y1)/2, self.__x1, (self.__y0+self.__y1)/2)
-        if (gauche + droite) > 0 :
+        if len(droite + gauche)>0:
             self.__vitx = -self.__vitx
-            id_bloc = gauche + droite
-
+            id_bloc += gauche + droite
+        if id_bloc==[]:
+            return 0
         return id_bloc
         
     def deplacement(self, canvas):
@@ -56,23 +57,23 @@ class balle :
         Detecte si il y a collision avec un bloc (ou la raquette) ou avec la bordure y = 0 (TODO si y = 1080 : fin de la partie) 
         Sortie : bool, True si il y a eu collision False sinon 
         '''
-        if self.__y1 == 1060:
-            self.del_balle(canvas)
+        if self.__y1 == 790:
+            canvas.move(self.__balle,0,380)
             return True
         return False
     
     def collision(self, canvas, x1, y1, x2, y2):
         '''
-        Detecte si il y a collision avec l'une des bordures x = 0 ou x = 1920
+        Detecte si il y a collision avec l'une des bordures x = 0 ou x = 700
         Sortie : int, id de l'objet collisionné (0 sinon) 
         TODO : Possibilité de toucher plusieurs objets en même temps
         '''
+        ids=[]
         overlap = canvas.find_overlapping(x1, y1, x2, y2)
-        if overlap != tuple():
-            for id_obj in overlap:
-                if id_obj != self.__balle:
-                    return id_obj
-        return 0
+        for id_obj in overlap:
+            if id_obj != self.__balle:
+                ids.append(id_obj)
+        return ids
     
     def del_balle(self, canvas):
         '''
