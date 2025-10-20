@@ -31,10 +31,10 @@ except Exception:
 
 window = tk.Tk()
 window.title('Casse-Brique')
-window.geometry('1920x1080')
-window.attributes('-fullscreen', True)
+window.geometry('700x800')
+# window.attributes('-fullscreen', True)
 
-frame_info = tk.Frame(window, width=1920, height=20, bg='grey')
+frame_info = tk.Frame(window, width=700, height=800, bg='grey')
 frame_info.pack(fill='both')
 
 btn_close = tk.Button(frame_info, text="X", command=window.destroy)
@@ -42,7 +42,7 @@ btn_close.pack(side='right')
 
 # Création du menu
 
-frame_menu = tk.Frame(window, width=1920, height=1060)
+frame_menu = tk.Frame(window, width=700, height=800)
 frame_menu.pack(fill='both', expand=True)
 
 tk.Label(frame_menu, text='Jeu du Casse-Brique !', height=5).pack()
@@ -69,7 +69,7 @@ canvas = None
 raquette = None
 balle = None
 blocs = None
-vies = 3 
+vies = 300
 diff = 1 
 
 # Démarrage du jeu (à la pression du bouton Jouer)
@@ -86,19 +86,20 @@ def initialisation():
     # Création du canvas
     frame_menu.destroy()
 
-    frame_canvas = tk.Frame(window, width=1920, height=1060)
+    frame_canvas = tk.Frame(window, width=700, height=800)
     frame_canvas.pack(fill='both', expand=True)
 
-    canvas = tk.Canvas(frame_canvas, bg='light grey', width=1920, height=1060)
+    canvas = tk.Canvas(frame_canvas, bg='light grey', width=700, height=800)
     canvas.pack(fill='both')
 
-    canvas.create_line(0, 0, 1920, 0, fill='green', width=10)
-    canvas.create_line(0, 0, 0, 1060, fill='green', width=10)
-    canvas.create_line(1920, 0, 1920, 1060, fill='green', width=10)
+    canvas.create_line(0, 0, 700, 0, fill='green', width=10)
+    canvas.create_line(0, 0, 0, 800, fill='green', width=10)
+    canvas.create_line(700, 0, 700, 800, fill='green', width=10)
+    canvas.create_line(0, 790, 700, 790, fill='green', width=10)
 
     # Création des objets 
     raquette = Raquette.palet(canvas)
-    balle = Balle.balle(canvas)
+    balle = Balle.balle(canvas,)
     blocs = Blocs.blocs(canvas, diff)
     
     jeu()
@@ -112,11 +113,16 @@ def mouvement(event):
     global canvas, raquette
     if event.keysym == 'Left':
         raquette.gauche(canvas)
+        window.after(1, mouvement)
     if event.keysym == 'Right':
         raquette.droite(canvas)
+        window.after(1, mouvement)
+
+
+
 
 def jeu():
-    global canvas, balle, blocs
+    global canvas, balle, blocs, vies
     if blocs.vide():
         messagebox.showinfo(message='Bravo!')
         #TODO
@@ -124,11 +130,21 @@ def jeu():
 
     idbloc = balle.id_col(canvas)
     if idbloc == -1:
-        balle.del_balle(canvas)
-        window.destroy()
+        vies -= 1
+        balle.deplacement(canvas)
+        print(vies)
+        if vies <= 0:
+            messagebox.showinfo(message='Partie terminée !')
+            window.after(1000,balle.del_balle(canvas))
+            # window.destroy()
+            return
+        
+        window.after(20, jeu)
         #TODO La gestion des vies
     else:
-        blocs.cassage(canvas, idbloc)
+        if idbloc!= 0 and len(idbloc)>0:
+            for obj in idbloc : 
+                blocs.cassage(canvas, obj)
         balle.deplacement(canvas)
         window.after(20, jeu)
 
