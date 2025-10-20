@@ -5,7 +5,7 @@ Martin Timeo, Braz Arno
 TODO : Collisions diagonales + Fin du jeu pour y = 1080 (+ option de jeu sur les paramètres de vitesse)
 '''
 import tkinter as tk
-from random import randint
+# from random import randint
 
 class balle : 
     def __init__(self, canvas, x=940, y=710, diametre=40): 
@@ -16,7 +16,7 @@ class balle :
         self.__balle = canvas.create_oval(x, y, x+diametre, y+diametre, fill = "red")
         self.__rayon = diametre/2 #-> non ?
         self.__x0, self.__y0, self.__x1, self.__y1 = canvas.coords(self.__balle)
-        self.__vitx = randint(1, 10) * ((-1)**(randint(1, 2)))
+        self.__vitx = -10
         self.__vity = -10
 
     def id_col(self, canvas):

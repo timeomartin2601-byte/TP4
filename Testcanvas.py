@@ -1,14 +1,19 @@
 import tkinter as tk
 import Blocs as blc
-import raquette as pal
+import Raquette as pal
 import Balle as bal
+from tkinter import messagebox
 
+'''
+Section tirée d'internet permettant de résoudre un problème de dimension d'un écran à l'autre
+références utilisées : https://stackoverflow.com/questions/41315873/attempting-to-resolve-blurred-tkinter-text-scaling-on-windows-10-high-dpi-disp?
+et https://stackoverflow.com/questions/62794931/high-dpi-tkinter-re-scaling-when-i-run-it-in-spyder-and-when-i-run-it-direct-in?
+'''
 try:
     from ctypes import windll
     windll.shcore.SetProcessDpiAwareness(1)  # Windows 8.1+
 except Exception:
     pass
-
 
 # Création de la fenêtre
 
@@ -21,8 +26,8 @@ mw.geometry('1920x1080')
 
 canvas = tk.Canvas(mw, bg='ivory', width=1920, height=1080)
 canvas.grid(row=0, column=0, ipadx=1920, ipady=1080)
-# bord_g = canvas.create_line(0, 0, 0, 1080, width=10, fill='red')
-# bord_d = canvas.create_line(1920, 0, 1920, 1080, width=10, fill='red')
+# bord_g = canvas.create_line(0, 0, 0, 1060, width=50, fill='blue')
+# bord_d = canvas.create_line(1920, 0, 1920, 1060, width=50, fill='blue')
 
 tk.Button(canvas, text="Quitter", command=mw.destroy).grid(row=0, column=2, ipadx=100, padx=1150)
 
@@ -42,10 +47,7 @@ balle = bal.Balle(canvas)
 def on_key(event):
     if event.keysym == "space":
         balle.deplacement(canvas)
-        B.cassage(canvas, coord=(220, 30))
-    if event.keysym == "space" :
-        canvas.move(blocs[(120, 30)], 300, 300)
-        canvas.delete(blocs[(220, 30)])
+        B.cassage(canvas, 24)
 
 def destr(event):
     rect = canvas.find_overlapping(event.x, event.y, event.x, event.y)
@@ -59,21 +61,28 @@ mw.bind("<Button-1>", destr)
     
 # Creation palet et balle
 palet=pal.palet(canvas)
-# balle = bal.Balle(canvas)
+
+
+def jeu():
+    id_bloc = balle.deplacement(canvas)
+    if id_bloc == -1:
+        retry = messagebox.askyesno(message='Game Over !')
+        return
+    else:
+        B.cassage(canvas, id_bloc)
+    mw.after(20, jeu)
 
 def mouv(event):
     if event.keysym == "Right":
         palet.droite(canvas)
     if event.keysym == "Left":
         palet.gauche(canvas)
-    if event.keysym == 'l':
-        a = balle.deplacement(canvas)
-        if a not in (0, 51):
-            B.cassage(canvas, a)
 
 mw.bind("<Key>", mouv)
 
 mw.resizable(False, False)
 
+# balle = bal.Balle(canvas)
+jeu()
 
 tk.mainloop()
