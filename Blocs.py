@@ -12,9 +12,9 @@ class blocs:
         blocs : list, l'entièreté des identifiants des blocs 
         """
         blocs = dict()
-        for l in range(10):
+        for l in range(8):
             for c in range(5):
-                blocs[canvas.create_rectangle(10 + (190 * l), 30 + (80 * c), 190 + (190 * l), 100 + (80 * c), fill="blue")] = etat 
+                blocs[canvas.create_rectangle(5 + (87 * l), 22 + (60 * c), 87 + (87 * l), 74 + (60 * c), fill="blue")] = etat 
         self.__blocs = blocs
 
     def cassage(self, canvas, id_rect : int):
