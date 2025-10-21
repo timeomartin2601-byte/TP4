@@ -8,7 +8,7 @@ import tkinter as tk
 from random import randint
 
 class balle : 
-    def __init__(self, canvas, x=330, y=380, diametre=40): 
+    def __init__(self, canvas, x=330, y=380, diametre=20): 
         '''
         Création de la balle, sauvegarde de son identifiant, création de ses paramètres coordonnées et vitesse (Par défaut : balle 40x40 px)
         TODO : vitesse croissante et initialisation aléatoire par exemple

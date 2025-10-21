@@ -16,16 +16,16 @@ import Balle
 import Raquette 
 from tkinter import messagebox
 
-'''
-Section tirée d'internet permettant de résoudre un problème de dimension d'un écran à l'autre
-références utilisées : https://stackoverflow.com/questions/41315873/attempting-to-resolve-blurred-tkinter-text-scaling-on-windows-10-high-dpi-disp?
-et https://stackoverflow.com/questions/62794931/high-dpi-tkinter-re-scaling-when-i-run-it-in-spyder-and-when-i-run-it-direct-in?
-'''
-try:
-    from ctypes import windll
-    windll.shcore.SetProcessDpiAwareness(1)  # Windows 8.1+
-except Exception:
-    pass
+# '''
+# Section tirée d'internet permettant de résoudre un problème de dimension d'un écran à l'autre
+# références utilisées : https://stackoverflow.com/questions/41315873/attempting-to-resolve-blurred-tkinter-text-scaling-on-windows-10-high-dpi-disp?
+# et https://stackoverflow.com/questions/62794931/high-dpi-tkinter-re-scaling-when-i-run-it-in-spyder-and-when-i-run-it-direct-in?
+# '''
+# try:
+#     from ctypes import windll
+#     windll.shcore.SetProcessDpiAwareness(1)  # Windows 8.1+
+# except Exception:
+#     pass
 
 
 # Création de la fenêtre tkinter 
