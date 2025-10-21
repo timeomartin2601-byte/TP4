@@ -31,5 +31,8 @@ class jeu :
     def lecanvas(self):
         return self.__canvas
     
+    def frame(self):
+        return self.__frame_canvas
+    
     def moins_vie(self):
         self.__vies -= 1

@@ -20,18 +20,12 @@ class menu :
         tk.Label(self.__frame_menu, text='Jeu du Casse-Brique !', height=5).pack()
 
         tk.Label(self.__frame_menu, text='Nombre de vie (3 par défaut) :').pack()
-        vies_entry = tk.Entry(self.__frame_menu)
-        vies_entry.pack()
+        self.__vies_entry = tk.Entry(self.__frame_menu)
+        self.__vies_entry.pack()
 
         tk.Label(self.__frame_menu, text='difficulté (1 à 3) :').pack()
-        diff_entry = tk.Entry(self.__frame_menu)
-        diff_entry.pack()
-
-        if entier(vies_entry.get()):
-            self.__vies = int(vies_entry.get())
-    
-        if diff_entry.get() in ['1', '2', '3']: 
-            self.__diff = int(diff_entry.get())
+        self.__diff_entry = tk.Entry(self.__frame_menu)
+        self.__diff_entry.pack()
 
     def suppr_autre_win(self):
         if len(self.__win.winfo_children()) > 1:
@@ -40,12 +34,20 @@ class menu :
 
     def frame(self):
         return self.__frame_menu
-
-    def nb_vies(self):
-        return self.__vies
     
     def difficulte(self):
-        return self.__diff
+        valeur = self.__diff_entry.get()
+        if valeur in ['1', '2', '3']: 
+            return int(valeur)
+        else:
+            return self.__diff
+
+    def nb_vies(self):
+        valeur = self.__vies_entry.get()
+        if entier(valeur):
+            return int(valeur)
+        else:
+            return self.__vies
 
 def entier(valeur):
     if valeur != '':

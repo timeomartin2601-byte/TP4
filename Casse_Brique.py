@@ -52,17 +52,19 @@ canvas = None
 raquette = None
 balle = None
 blocs = None
-vies = menu.nb_vies()
-diff = menu.difficulte() 
+vies = 3
+diff = None
 
 # Démarrage du jeu (à la pression du bouton Jouer)
 def initialisation():
     # Paramètrages des variables globales
-    global canvas, raquette, balle, blocs, vies, diff
+    global canvas, raquette, balle, blocs, vies, diff, frame_canvas
+    vies = menu.nb_vies()
+    diff = menu.difficulte() 
 
     frame_canvas = Jeu.jeu(window, vies)
     canvas = frame_canvas.lecanvas()
-
+    
     # Création des objets 
     raquette = Raquette.palet(canvas)
     balle = Balle.balle(canvas)
@@ -97,7 +99,10 @@ def jeu():
         balle=Balle.balle(canvas)
         print(vies) #TODO Label
         if vies <= 0:
-            messagebox.showinfo(message='Partie terminée !')
+            retry = messagebox.askyesno(message='Rejouer ?')
+            if retry:
+                frame_canvas.frame().destroy()                  #TODO WIP rejouer
+                rejouer()
             # window.destroy()
             return
         window.after(1000, jeu)
@@ -109,6 +114,8 @@ def jeu():
         balle.deplacement()
         window.after(10, jeu)
 
+def rejouer():
+    initialisation()
 
 window.bind("<Key>", mouvement)
 tk.mainloop()
