@@ -5,6 +5,7 @@ Braz Arno, Martin Timeo
 TODO :  - Gestion des vies
         - Prévoir un bouton rejouer à la fin
         - Idéalement remplacer un max de forme par des images pour que ce soit plus beau et agréable à jouer
+        -label rejouer,timer,vies,retour au menu
 '''
 
 # Importation des modules et des classes
@@ -69,7 +70,7 @@ canvas = None
 raquette = None
 balle = None
 blocs = None
-vies = 300
+vies = 3
 diff = 1 
 
 # Démarrage du jeu (à la pression du bouton Jouer)
@@ -95,7 +96,7 @@ def initialisation():
     canvas.create_line(0, 0, 700, 0, fill='green', width=10)
     canvas.create_line(0, 0, 0, 800, fill='green', width=10)
     canvas.create_line(700, 0, 700, 800, fill='green', width=10)
-    canvas.create_line(0, 790, 700, 790, fill='green', width=10)
+
 
     # Création des objets 
     raquette = Raquette.palet(canvas)
@@ -112,11 +113,11 @@ b1.pack()
 def mouvement(event):
     global canvas, raquette
     if event.keysym == 'Left':
-        raquette.gauche(canvas)
-        window.after(1, mouvement)
+            raquette.gauche(canvas)
+
     if event.keysym == 'Right':
         raquette.droite(canvas)
-        window.after(1, mouvement)
+
 
 
 
@@ -127,26 +128,24 @@ def jeu():
         messagebox.showinfo(message='Bravo!')
         #TODO
         return
-
     idbloc = balle.id_col(canvas)
     if idbloc == -1:
         vies -= 1
-        balle.deplacement(canvas)
+        balle.del_balle(canvas)
+        balle=Balle.balle(canvas)
         print(vies)
         if vies <= 0:
             messagebox.showinfo(message='Partie terminée !')
-            window.after(1000,balle.del_balle(canvas))
             # window.destroy()
             return
-        
-        window.after(20, jeu)
+        window.after(1000, jeu)
         #TODO La gestion des vies
     else:
         if idbloc!= 0 and len(idbloc)>0:
             for obj in idbloc : 
                 blocs.cassage(canvas, obj)
         balle.deplacement(canvas)
-        window.after(20, jeu)
+        window.after(10, jeu)
 
 
 window.bind("<Key>", mouvement)
