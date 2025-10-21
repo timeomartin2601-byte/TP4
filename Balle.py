@@ -20,39 +20,38 @@ class balle :
         # self.__vitx = randint(1, 10) * ((-1)**(randint(1, 2)))
         self.__vitx =5
         self.__vity = -5
-    
+
     def id_col(self):
         '''
-        Gére le déplacement de la balle, vérifie si il y a collision et réagis en conséquence
-        Gestion :   - définir la délimitation de l'aire de jeu 
-                    - inversion du x, y ou les 2 en fonction de la collision
-        Sortie : int, l'identifiant de l'objet collisionné sinon 0
-        TODO : Gestion des collisions diagonales 
+        Gére le déplacement de la balle en testant les axes X et Y séparemment
+        pour éviter les fausses détections diagonales.
         '''
         if self.perdu():
             return -1
-        id_bloc = []
+        
         self.__x0, self.__y0, self.__x1, self.__y1 = self.__canvas.coords(self.__balle)
         
-        haut = self.collision(self.__x0+abs(self.__vitx), self.__y0, self.__x1-abs(self.__vitx), self.__y0)
-        bas = self.collision(self.__x0+abs(self.__vitx), self.__y1, self.__x1-abs(self.__vitx), self.__y1)
-        gauche = self.collision(self.__x0, self.__y0+abs(self.__vity), self.__x0, self.__y1-abs(self.__vity))
-        droite = self.collision(self.__x1, self.__y0+abs(self.__vity), self.__x1, self.__y1-abs(self.__vity))
+        futur_y0 = self.__y0 + self.__vity
+        futur_y1 = self.__y1 + self.__vity
+        ids_vertical = self.collision(self.__x0, futur_y0, self.__x1, futur_y1)
+        
+        futur_x0 = self.__x0 + self.__vitx
+        futur_x1 = self.__x1 + self.__vitx
+        ids_horizontal = self.collision(futur_x0, self.__y0, futur_x1, self.__y1)
 
-        if len(haut+ bas) > 0 and len(droite + gauche) > 0 :
-                self.__vitx, self.__vity = -self.__vity, -self.__vitx
-                id_bloc += haut + bas + gauche + droite
+        id_bloc = []
 
-        if len(haut + bas)>0:
+        if len(ids_vertical) > 0:
             self.__vity = -self.__vity
-            id_bloc += haut + bas
+            id_bloc += ids_vertical
 
-        if len(droite + gauche)>0:
+        if len(ids_horizontal) > 0:
             self.__vitx = -self.__vitx
-            id_bloc += gauche + droite
-
-        if id_bloc==[]:
+            id_bloc += ids_horizontal
+        
+        if id_bloc == []:
             return 0
+        
         return id_bloc
         
     def deplacement(self):
