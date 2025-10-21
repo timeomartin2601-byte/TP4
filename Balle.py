@@ -35,15 +35,21 @@ class balle :
         
         haut = self.collision(canvas, self.__x0+abs(self.__vitx), self.__y0, self.__x1-abs(self.__vitx), self.__y0)
         bas = self.collision(canvas, self.__x0+abs(self.__vitx), self.__y1, self.__x1-abs(self.__vitx), self.__y1)
+        gauche = self.collision(canvas, self.__x0, self.__y0+abs(self.__vity), self.__x0, self.__y1-abs(self.__vity))
+        droite = self.collision(canvas, self.__x1, self.__y0+abs(self.__vity), self.__x1, self.__y1-abs(self.__vity))
+
+        if len(haut+ bas) > 0 and len(droite + gauche) > 0 :
+                self.__vitx, self.__vity = -self.__vity, -self.__vitx
+                id_bloc += haut + bas + gauche + droite
+
         if len(haut + bas)>0:
             self.__vity = -self.__vity
             id_bloc += haut + bas
 
-        gauche = self.collision(canvas, self.__x0, self.__y0+abs(self.__vity), self.__x0, self.__y1-abs(self.__vity))
-        droite = self.collision(canvas, self.__x1, self.__y0+abs(self.__vity), self.__x1, self.__y1-abs(self.__vity))
         if len(droite + gauche)>0:
             self.__vitx = -self.__vitx
             id_bloc += gauche + droite
+            
         if id_bloc==[]:
             return 0
         return id_bloc
