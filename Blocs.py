@@ -11,13 +11,14 @@ class blocs:
         Entrée : etat - int, réglable de 1 à 3 nombre de coups pour casser un bloc
         blocs : list, l'entièreté des identifiants des blocs 
         """
+        self.__canvas = canvas
         blocs = dict()
         for l in range(8):
             for c in range(5):
-                blocs[canvas.create_rectangle(5 + (87 * l), 22 + (60 * c), 87 + (87 * l), 74 + (60 * c), fill="blue")] = etat 
+                blocs[self.__canvas.create_rectangle(5 + (87 * l), 22 + (60 * c), 87 + (87 * l), 74 + (60 * c), fill="blue")] = etat 
         self.__blocs = blocs
 
-    def cassage(self, canvas, id_rect : int):
+    def cassage(self, id_rect : int):
         """
         Supprime un bloc sur le canvas à partir de son identifiant et le supprime de la liste des blocs
         """
@@ -26,9 +27,9 @@ class blocs:
             self.__blocs[id_rect] -= 1
             etat = self.__blocs[id_rect]
             if etat > 0:
-                canvas.itemconfig(id_rect, fill=couleurs[etat])
+                self.__canvas.itemconfig(id_rect, fill=couleurs[etat])
             else:
-                canvas.delete(id_rect)
+                self.__canvas.delete(id_rect)
                 del self.__blocs[id_rect]        
 
     def vide(self):

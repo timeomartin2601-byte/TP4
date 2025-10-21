@@ -5,7 +5,7 @@ Braz Arno, Martin Timeo
 TODO :  - Gestion des vies
         - Prévoir un bouton rejouer à la fin
         - Idéalement remplacer un max de forme par des images pour que ce soit plus beau et agréable à jouer
-        -label rejouer,timer,vies,retour au menu
+        - label rejouer,timer,vies,retour au menu
 '''
 
 # Importation des modules et des classes
@@ -100,7 +100,7 @@ def initialisation():
 
     # Création des objets 
     raquette = Raquette.palet(canvas)
-    balle = Balle.balle(canvas,)
+    balle = Balle.balle(canvas)
     blocs = Blocs.blocs(canvas, diff)
     
     jeu()
@@ -113,13 +113,10 @@ b1.pack()
 def mouvement(event):
     global canvas, raquette
     if event.keysym == 'Left':
-            raquette.gauche(canvas)
+            raquette.gauche()
 
     if event.keysym == 'Right':
-        raquette.droite(canvas)
-
-
-
+        raquette.droite()
 
 
 def jeu():
@@ -128,10 +125,10 @@ def jeu():
         messagebox.showinfo(message='Bravo!')
         #TODO
         return
-    idbloc = balle.id_col(canvas)
+    idbloc = balle.id_col()
     if idbloc == -1:
         vies -= 1
-        balle.del_balle(canvas)
+        balle.del_balle()
         balle=Balle.balle(canvas)
         print(vies)
         if vies <= 0:
@@ -143,8 +140,8 @@ def jeu():
     else:
         if idbloc!= 0 and len(idbloc)>0:
             for obj in idbloc : 
-                blocs.cassage(canvas, obj)
-        balle.deplacement(canvas)
+                blocs.cassage(obj)
+        balle.deplacement()
         window.after(10, jeu)
 
 
