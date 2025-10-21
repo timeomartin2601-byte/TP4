@@ -145,6 +145,7 @@ def jeu():
         window.after(10, jeu)
 
 
+print(window.winfo_children())
 window.bind("<Key>", mouvement)
 tk.mainloop()
 
