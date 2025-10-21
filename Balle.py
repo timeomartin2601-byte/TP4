@@ -16,9 +16,10 @@ class balle :
         self.__balle = canvas.create_oval(x, y, x+diametre, y+diametre, fill = "red")
         self.__rayon = diametre/2 #-> non ?
         self.__x0, self.__y0, self.__x1, self.__y1 = canvas.coords(self.__balle)
-        self.__vitx = randint(1, 10) * ((-1)**(randint(1, 2)))
-        self.__vity = -10
-
+        # self.__vitx = randint(1, 10) * ((-1)**(randint(1, 2)))
+        self.__vitx =5
+        self.__vity = -5
+    
     def id_col(self, canvas):
         '''
         Gére le déplacement de la balle, vérifie si il y a collision et réagis en conséquence
@@ -29,18 +30,17 @@ class balle :
         '''
         if self.perdu(canvas):
             return -1
-
         id_bloc = []
         self.__x0, self.__y0, self.__x1, self.__y1 = canvas.coords(self.__balle)
         
-        haut = self.collision(canvas, (self.__x0+self.__x1)/2, self.__y0, (self.__x0+self.__x1)/2, self.__y0)
-        bas = self.collision(canvas, (self.__x0+self.__x1)/2, self.__y1, (self.__x0+self.__x1)/2, self.__y1)
+        haut = self.collision(canvas, self.__x0+abs(self.__vitx), self.__y0, self.__x1-abs(self.__vitx), self.__y0)
+        bas = self.collision(canvas, self.__x0+abs(self.__vitx), self.__y1, self.__x1-abs(self.__vitx), self.__y1)
         if len(haut + bas)>0:
             self.__vity = -self.__vity
             id_bloc += haut + bas
 
-        gauche = self.collision(canvas, self.__x0, (self.__y0+self.__y1)/2, self.__x0, (self.__y0+self.__y1)/2)
-        droite = self.collision(canvas, self.__x1, (self.__y0+self.__y1)/2, self.__x1, (self.__y0+self.__y1)/2)
+        gauche = self.collision(canvas, self.__x0, self.__y0+abs(self.__vity), self.__x0, self.__y1-abs(self.__vity))
+        droite = self.collision(canvas, self.__x1, self.__y0+abs(self.__vity), self.__x1, self.__y1-abs(self.__vity))
         if len(droite + gauche)>0:
             self.__vitx = -self.__vitx
             id_bloc += gauche + droite
@@ -58,7 +58,7 @@ class balle :
         Sortie : bool, True si il y a eu collision False sinon 
         '''
         if self.__y1 == 790:
-            canvas.move(self.__balle,0,380)
+            canvas.move(self.__balle,0,-380)
             return True
         return False
     
