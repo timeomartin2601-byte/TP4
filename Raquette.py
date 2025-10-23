@@ -15,29 +15,19 @@ class palet:
         self.__x, self.__y, self.__dim = x, y, dim
         self.__paletg = self.__canvas.create_rectangle(x, y, x+(dim[0]/2), y+dim[1], fill="black")
         self.__paletd = self.__canvas.create_rectangle(x+(dim[0]/2), y, x+dim[0], y+dim[1], fill="red")
-        self.__mur_d=405
-        self.__mur_g=295
         self.__depl = 0
 
     def droite(self):
         '''
         Déplace la raquette à droite à chaque pression de la flèche droite
         '''
-        if self.__mur_d+10 <700:
-            self.__depl = 10
-            self.__mur_d+=20
-            self.__mur_g+=20            
-            # print(self.mur_d)
+        self.__depl = 10
 
     def gauche(self):
         '''
         Déplace la raquette à gauche à chaque pression de la flèche gauche
         '''
-        if self.__mur_g-10 >0:
-            self.__depl = -10
-            self.__mur_g-=20
-            self.__mur_d-=20
-            # print(self.mur_g)
+        self.__depl = -10
 
     def stop(self):
         self.__depl = 0
@@ -46,8 +36,9 @@ class palet:
         '''
         
         '''
-        if self.__x+abs(self.__depl) < 700 or self.__x-abs(self.__depl)>0:
+        if self.__x + self.__depl > 0 and self.__x + self.__dim[0] + self.__depl < 700 :
             self.__x+=self.__depl
+
         self.__canvas.coords(self.__paletg, self.__x, self.__y, self.__x+(self.__dim[0]/2), self.__y+self.__dim[1])
         self.__canvas.coords(self.__paletd, self.__x+(self.__dim[0]/2), self.__y, self.__x+self.__dim[0], self.__y+self.__dim[1])
 

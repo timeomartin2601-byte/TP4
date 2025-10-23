@@ -26,7 +26,7 @@ window.geometry('700x800')
 window.overrideredirect(True)
 # window.attributes('-fullscreen', True)
 
-frame_info = tk.Frame(window, width=700, height=800, bg='grey')
+frame_info = tk.Frame(window, width=700, height=200, bg='grey')
 frame_info.pack(fill='both')
 
 
@@ -89,7 +89,6 @@ def fenetre_menu():
 
         if event.keysym == 'Right':
             raquette.droite()
-
     def stop(event):
         global raquette
         raquette.stop()
