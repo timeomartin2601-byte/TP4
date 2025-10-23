@@ -40,6 +40,7 @@ class jeu :
         self.__vies -= 1
     
     def destruction(self,):
+    def destruction(self):
         self.__frame_canvas.destroy()
 
     def restart(self,fct_retour,fct_rejouer,window):
