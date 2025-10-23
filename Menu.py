@@ -14,16 +14,16 @@ class lemenu :
 
         self.suppr_autre_win()
 
-        self.__frame_menu = tk.Frame(fenetre, width=700, height=800)
+        self.__frame_menu = tk.Frame(fenetre, width=700, height=800,bg='black')
         self.__frame_menu.pack(fill='both', expand=True)
 
-        tk.Label(self.__frame_menu, text='Jeu du Casse-Brique !', height=5).pack()
+        tk.Label(self.__frame_menu, text='Jeu du Casse-Brique !', height=5,fg='white',bg='black').pack()
 
-        tk.Label(self.__frame_menu, text='Nombre de vie (3 par défaut) :').pack()
+        tk.Label(self.__frame_menu, text='Nombre de vie (3 par défaut) :',fg='white',bg='black').pack()
         self.__vies_entry = tk.Entry(self.__frame_menu)
         self.__vies_entry.pack()
 
-        tk.Label(self.__frame_menu, text='difficulté (1 à 3) :').pack()
+        tk.Label(self.__frame_menu, text='difficulté (1 à 3) :',fg='white',bg='black').pack()
         self.__diff_entry = tk.Entry(self.__frame_menu)
         self.__diff_entry.pack()
 
