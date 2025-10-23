@@ -12,26 +12,33 @@ class palet:
         palet : un rectangle (canvas) représentant la plateforme que le joueur controle
         '''
         self.__canvas = canvas
-        self.palet = self.__canvas.create_rectangle(x, y, x+dim[0], y+dim[1], fill="black")
-        self.mur_d=405
-        self.mur_g=295
+        self.__x, self.__y, self.__dim = x, y, dim
+        self.__palet = self.__canvas.create_rectangle(x, y, x+dim[0], y+dim[1], fill="black")
+        self.__mur_d=405
+        self.__mur_g=295
 
     def droite(self):
         '''
         Déplace la raquette à droite à chaque pression de la flèche droite
         '''
-        if self.mur_d <700:
-            self.__canvas.move(self.palet, 20, 0)
-            self.mur_d+=20
-            self.mur_g+=20            
+        if self.__mur_d <700:
+            self.__x += 20
+            self.__mur_d+=20
+            self.__mur_g+=20            
             # print(self.mur_d)
 
     def gauche(self):
         '''
         Déplace la raquette à gauche à chaque pression de la flèche gauche
         '''
-        if self.mur_g >0:
-            self.__canvas.move(self.palet, -20, 0)
-            self.mur_g-=20
-            self.mur_d-=20
+        if self.__mur_g >0:
+            self.__x -= 20
+            self.__mur_g-=20
+            self.__mur_d-=20
             # print(self.mur_g)
+
+    def mouv(self):
+        '''
+        
+        '''
+        self.__canvas.coords(self.__palet, self.__x, self.__y, self.__x+self.__dim[0], self.__y+self.__dim[1])
