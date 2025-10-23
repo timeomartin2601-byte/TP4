@@ -23,20 +23,20 @@ class palet:
         '''
         Déplace la raquette à droite à chaque pression de la flèche droite
         '''
-        if self.__mur_d <700:
-            self.__depl += 10
-            self.__mur_d+=10
-            self.__mur_g+=10            
+        if self.__mur_d+10 <700:
+            self.__depl = 10
+            self.__mur_d+=20
+            self.__mur_g+=20            
             # print(self.mur_d)
 
     def gauche(self):
         '''
         Déplace la raquette à gauche à chaque pression de la flèche gauche
         '''
-        if self.__mur_g >0:
-            self.__depl -= 10
-            self.__mur_g-=10
-            self.__mur_d-=10
+        if self.__mur_g-10 >0:
+            self.__depl = -10
+            self.__mur_g-=20
+            self.__mur_d-=20
             # print(self.mur_g)
 
     def stop(self):
