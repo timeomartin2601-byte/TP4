@@ -70,9 +70,13 @@ def fenetre_menu():
         frame_canvas = Jeu.jeu(window, vies)
         canvas = frame_canvas.lecanvas()
         
+        canvas.bind("<KeyPress>", mouvement)
+        canvas.bind("<KeyRelease>", stop)
+
+
         # Création des objets 
         raquette = Raquette.palet(canvas)
-        balle = Balle.laballe(canvas)
+        balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
         blocs = Blocs.lesblocs(canvas, diff)
         
         jeu()
@@ -93,14 +97,17 @@ def fenetre_menu():
     def mouvement(event):
         global canvas, raquette
         if event.keysym == 'Left':
-                raquette.gauche()
+            raquette.gauche()
 
         if event.keysym == 'Right':
             raquette.droite()
 
+    def stop(event):
+        global raquette
+        raquette.stop()
 
     def jeu():
-        global canvas, balle, blocs, vies
+        global canvas, balle, blocs, vies, raquette
         if blocs.vide():
             messagebox.showinfo(message='Bravo!')
             #TODO
@@ -109,7 +116,7 @@ def fenetre_menu():
         if idbloc == -1:
             vies -= 1
             balle.del_balle()
-            balle=Balle.laballe(canvas)
+            balle=Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
             print(vies) #TODO Label
             if vies <= 0:
                 frame_canvas.restart(retour_menu,rejouer,window)
@@ -126,7 +133,7 @@ def fenetre_menu():
             balle.deplacement()
             window.after(10, jeu)
 
-    window.bind("<Key>", mouvement)
+
     tk.mainloop()
 
 fenetre_menu()
