@@ -17,6 +17,7 @@ import Raquette
 import Menu
 import Jeu
 from tkinter import messagebox
+from PIL import ImageTk
 
 # Création de la fenêtre tkinter 
 
