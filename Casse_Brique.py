@@ -52,7 +52,6 @@ menu = Menu.lemenu(window)
 def fenetre_menu():
 
     # Création du menu
-    menu = Menu.menu(window)
 
 
     # Initialisation des variables globales
@@ -76,8 +75,6 @@ def fenetre_menu():
         
         # Création des objets 
         raquette = Raquette.palet(canvas)
-        balle = Balle.balle(canvas)
-        blocs = Blocs.blocs(canvas, diff)
         balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
         blocs = Blocs.lesblocs(canvas, diff)
         
@@ -116,7 +113,6 @@ def fenetre_menu():
         if idbloc == -1:
             vies -= 1
             balle.del_balle()
-            balle=Balle.balle(canvas)
             balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
             print(vies) #TODO Label
             if vies <= 0:
