@@ -21,12 +21,8 @@ class jeu :
         self.__frame_canvas = tk.Frame(fenetre, width=700, height=800)
         self.__frame_canvas.pack(fill='both', expand=True)
 
-
         self.__canvas = tk.Canvas(self.__frame_canvas, bg='black', width=700, height=800)
         self.__canvas.pack(fill='both')
-
-        # image = ImageTk.PhotoImage(file = "BackgroundCasseBrique.png")
-        # self.__canvas.create_image(10, 10, image = image, anchor = NW)
 
         self.__canvas_fin = tk.Frame(self.__canvas)
 
