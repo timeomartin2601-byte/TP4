@@ -35,17 +35,19 @@ from tkinter import messagebox
 window = tk.Tk()
 window.title('Casse-Brique')
 window.geometry('700x800')
+window.overrideredirect(True)
 # window.attributes('-fullscreen', True)
 
 frame_info = tk.Frame(window, width=700, height=800, bg='grey')
 frame_info.pack(fill='both')
+
 
 btn_close = tk.Button(frame_info, text="X", command=window.destroy)
 btn_close.pack(side='right')
 
 # Création du menu
 
-menu = Menu.menu(window)
+menu = Menu.lemenu(window)
 
 # Initialisation des variables globales
 canvas = None
@@ -67,8 +69,8 @@ def initialisation():
     
     # Création des objets 
     raquette = Raquette.palet(canvas)
-    balle = Balle.balle(canvas)
-    blocs = Blocs.blocs(canvas, diff)
+    balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
+    blocs = Blocs.lesblocs(canvas, diff)
     
     jeu()
 
@@ -78,16 +80,19 @@ b1.pack()
 # Programme Principal
 
 def mouvement(event):
-    global canvas, raquette
+    global raquette
     if event.keysym == 'Left':
-            raquette.gauche()
+        raquette.gauche()
 
     if event.keysym == 'Right':
         raquette.droite()
 
+def stop(event):
+    global raquette
+    raquette.stop()
 
 def jeu():
-    global canvas, balle, blocs, vies
+    global canvas, raquette, balle, blocs, vies
     if blocs.vide():
         messagebox.showinfo(message='Bravo!')
         #TODO
@@ -96,7 +101,7 @@ def jeu():
     if idbloc == -1:
         vies -= 1
         balle.del_balle()
-        balle=Balle.balle(canvas)
+        balle=Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
         print(vies) #TODO Label
         if vies <= 0:
             retry = messagebox.askyesno(message='Rejouer ?')
@@ -112,11 +117,20 @@ def jeu():
             for obj in idbloc : 
                 blocs.cassage(obj)
         balle.deplacement()
+        raquette.mouv()
         window.after(10, jeu)
 
 def rejouer():
     initialisation()
 
-window.bind("<Key>", mouvement)
-tk.mainloop()
+# def retourmenu():
+#     menu=Menu.lemenu(window)
+#     b1 = tk.Button(menu.frame(), text='Jouer', command=initialisation)
+#     b1.pack()
 
+# btn_retry = tk.Button(frame_info, text="Menu", command=retourmenu)
+# btn_retry.pack(side='top')
+
+window.bind("<KeyPress>", mouvement)
+window.bind("<KeyRelease>", stop)
+tk.mainloop()
