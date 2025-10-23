@@ -35,6 +35,7 @@ from tkinter import messagebox
 window = tk.Tk()
 window.title('Casse-Brique')
 window.geometry('700x800')
+window.overrideredirect(True)
 # window.attributes('-fullscreen', True)
 
 frame_info = tk.Frame(window, width=700, height=800, bg='grey')
@@ -127,6 +128,6 @@ def rejouer():
 # btn_retry = tk.Button(frame_info, text="Menu", command=retourmenu)
 # btn_retry.pack(side='top')
 
-window.bind("<Key>", mouvement)
+window.bind("<KeyPress>", mouvement)
 tk.mainloop()
 

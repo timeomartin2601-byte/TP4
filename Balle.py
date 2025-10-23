@@ -44,6 +44,12 @@ class laballe :
         id_bloc = []
 
         if len(ids_vertical) > 0:
+            if self.__pg in ids_vertical:
+                if self.__vitx > 0:
+                    self.__vitx = -self.__vitx
+            elif self.__pd in ids_vertical:
+                if self.__vitx < 0:
+                    self.__vitx = -self.__vitx
             self.__vity = -self.__vity
             id_bloc += ids_vertical
 
@@ -95,3 +101,4 @@ class laballe :
         Sortie : Bool, True si le jeu doit s'arreter, False sinon
         '''
         return not self.__balle in self.__canvas.find_all()
+    
