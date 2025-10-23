@@ -80,13 +80,16 @@ b1.pack()
 # Programme Principal
 
 def mouvement(event):
-    global canvas, raquette
+    global raquette
     if event.keysym == 'Left':
         raquette.gauche()
 
     if event.keysym == 'Right':
         raquette.droite()
 
+def stop(event):
+    global raquette
+    raquette.stop()
 
 def jeu():
     global canvas, raquette, balle, blocs, vies
@@ -129,5 +132,6 @@ def rejouer():
 # btn_retry.pack(side='top')
 
 window.bind("<KeyPress>", mouvement)
+window.bind("<KeyRelease>", stop)
 tk.mainloop()
 
