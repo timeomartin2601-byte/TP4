@@ -20,9 +20,12 @@ from tkinter import messagebox
 
 # Création de la fenêtre tkinter 
 
+
 window = tk.Tk()
 window.title('Casse-Brique')
-window.geometry('700x800+610+140')
+largeur = window.winfo_screenwidth()
+hauteur = window.winfo_screenheight()
+window.geometry(f'700x800+{int((largeur/2)-350)}+{int((hauteur/2)-400)}')
 window.overrideredirect(True)
 # window.attributes('-fullscreen', True)
 
