@@ -39,7 +39,6 @@ class jeu :
     def moins_vie(self):
         self.__vies -= 1
     
-    def destruction(self,):
     def destruction(self):
         self.__frame_canvas.destroy()
 
