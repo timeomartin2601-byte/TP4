@@ -13,7 +13,7 @@ class palet:
         '''
         self.__canvas = canvas
         self.__x, self.__y, self.__dim = x, y, dim
-        self.__paletg = self.__canvas.create_rectangle(x, y, x+(dim[0]/2), y+dim[1], fill="black")
+        self.__paletg = self.__canvas.create_rectangle(x, y, x+(dim[0]/2), y+dim[1], fill="red")
         self.__paletd = self.__canvas.create_rectangle(x+(dim[0]/2), y, x+dim[0], y+dim[1], fill="red")
         self.__depl = 0
 
