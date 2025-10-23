@@ -68,7 +68,7 @@ def initialisation():
     
     # Création des objets 
     raquette = Raquette.palet(canvas)
-    balle = Balle.laballe(canvas)
+    balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
     blocs = Blocs.lesblocs(canvas, diff)
     
     jeu()
@@ -97,7 +97,7 @@ def jeu():
     if idbloc == -1:
         vies -= 1
         balle.del_balle()
-        balle=Balle.laballe(canvas)
+        balle=Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
         print(vies) #TODO Label
         if vies <= 0:
             retry = messagebox.askyesno(message='Rejouer ?')
