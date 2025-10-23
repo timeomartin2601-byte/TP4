@@ -19,6 +19,8 @@ class jeu :
         self.__canvas = tk.Canvas(self.__frame_canvas, bg='light grey', width=700, height=800)
         self.__canvas.pack(fill='both')
 
+        self.__canvas_fin=tk.Canvas(self.__canvas)
+
         self.__canvas.create_line(0, 0, 700, 0, fill='green', width=10)
         self.__canvas.create_line(0, 0, 0, 800, fill='green', width=10)
         self.__canvas.create_line(700, 0, 700, 800, fill='green', width=10)
@@ -36,3 +38,12 @@ class jeu :
     
     def moins_vie(self):
         self.__vies -= 1
+    
+    def destruction(self):
+        self.__frame_canvas.destroy()
+
+    def restart(self,fct_retour,fct_rejouer,window):
+        self.__canvas_fin.place(x=400,y=400)
+        btn_retour = tk.Button(self.__canvas_fin,text='retour menu' ,command=fct_retour).pack()
+        btn_rejouer = tk.Button(self.__canvas_fin,text='rejouer' ,command=fct_rejouer).pack()
+
