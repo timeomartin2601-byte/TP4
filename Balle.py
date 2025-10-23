@@ -17,8 +17,8 @@ class balle :
         self.__balle = self.__canvas.create_oval(x, y, x+diametre, y+diametre, fill = "red")
         self.__rayon = diametre/2 #-> non ?
         self.__x0, self.__y0, self.__x1, self.__y1 = self.__canvas.coords(self.__balle)
-        # self.__vitx = randint(1, 10) * ((-1)**(randint(1, 2)))
-        self.__vitx =5
+        self.__vitx = randint(1, 10) * ((-1)**(randint(1, 2)))
+        # self.__vitx =5
         self.__vity = -5
 
     def id_col(self):

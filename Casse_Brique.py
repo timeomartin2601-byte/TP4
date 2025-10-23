@@ -31,11 +31,11 @@ from tkinter import messagebox
 
 
 # Création de la fenêtre tkinter 
-
 window = tk.Tk()
 window.title('Casse-Brique')
 window.geometry('700x800')
 # window.attributes('-fullscreen', True)
+
 
 frame_info = tk.Frame(window, width=700, height=800, bg='grey')
 frame_info.pack(fill='both')
@@ -43,80 +43,90 @@ frame_info.pack(fill='both')
 btn_close = tk.Button(frame_info, text="X", command=window.destroy)
 btn_close.pack(side='right')
 
-# Création du menu
 
-menu = Menu.menu(window)
 
-# Initialisation des variables globales
-canvas = None
-raquette = None
-balle = None
-blocs = None
-vies = 3
-diff = None
 
-# Démarrage du jeu (à la pression du bouton Jouer)
-def initialisation():
-    # Paramètrages des variables globales
-    global canvas, raquette, balle, blocs, vies, diff, frame_canvas
-    vies = menu.nb_vies()
-    diff = menu.difficulte() 
+def fenetre_menu():
 
-    frame_canvas = Jeu.jeu(window, vies)
-    canvas = frame_canvas.lecanvas()
+    # Création du menu
+    menu = Menu.menu(window)
+
+    # Initialisation des variables globales
+    canvas = None
+    raquette = None
+    balle = None
+    blocs = None
+    vies = 3
+    diff = None
+
+
+    # Démarrage du jeu (à la pression du bouton Jouer)
+    def initialisation():
+        # Paramètrages des variables globales
+        global canvas, raquette, balle, blocs, vies, diff, frame_canvas
+        vies = menu.nb_vies()
+        diff = menu.difficulte() 
+
+        frame_canvas = Jeu.jeu(window, vies)
+        canvas = frame_canvas.lecanvas()
+        
+        # Création des objets 
+        raquette = Raquette.palet(canvas)
+        balle = Balle.balle(canvas)
+        blocs = Blocs.blocs(canvas, diff)
+        
+        jeu()
+
+    b1 = tk.Button(menu.frame(), text='Jouer', command=initialisation)
+    b1.pack()
+
+    def retour_menu():
+        frame_canvas.destruction()
+        fenetre_menu()
     
-    # Création des objets 
-    raquette = Raquette.palet(canvas)
-    balle = Balle.balle(canvas)
-    blocs = Blocs.blocs(canvas, diff)
+    def rejouer():
+        canvas.destroy()
+        initialisation()
     
-    jeu()
+    # Programme Principal
 
-b1 = tk.Button(menu.frame(), text='Jouer', command=initialisation)
-b1.pack()
+    def mouvement(event):
+        global canvas, raquette
+        if event.keysym == 'Left':
+                raquette.gauche()
 
-# Programme Principal
-
-def mouvement(event):
-    global canvas, raquette
-    if event.keysym == 'Left':
-            raquette.gauche()
-
-    if event.keysym == 'Right':
-        raquette.droite()
+        if event.keysym == 'Right':
+            raquette.droite()
 
 
-def jeu():
-    global canvas, balle, blocs, vies
-    if blocs.vide():
-        messagebox.showinfo(message='Bravo!')
-        #TODO
-        return
-    idbloc = balle.id_col()
-    if idbloc == -1:
-        vies -= 1
-        balle.del_balle()
-        balle=Balle.balle(canvas)
-        print(vies) #TODO Label
-        if vies <= 0:
-            retry = messagebox.askyesno(message='Rejouer ?')
-            if retry:
-                frame_canvas.frame().destroy()                  #TODO WIP rejouer
-                rejouer()
-            # window.destroy()
+    def jeu():
+        global canvas, balle, blocs, vies
+        if blocs.vide():
+            messagebox.showinfo(message='Bravo!')
+            #TODO
             return
-        window.after(1000, jeu)
-        #TODO La gestion des vies
-    else:
-        if idbloc!= 0 and len(idbloc)>0:
-            for obj in idbloc : 
-                blocs.cassage(obj)
-        balle.deplacement()
-        window.after(10, jeu)
+        idbloc = balle.id_col()
+        if idbloc == -1:
+            vies -= 1
+            balle.del_balle()
+            balle=Balle.balle(canvas)
+            print(vies) #TODO Label
+            if vies <= 0:
+                frame_canvas.restart(retour_menu,rejouer,window)
+                # if retry:
+                #     frame_canvas.frame().destroy()                  #TODO WIP rejouer
+                # window.destroy()
+                return
+            window.after(1000, jeu)
+            #TODO La gestion des vies
+        else:
+            if idbloc!= 0 and len(idbloc)>0:
+                for obj in idbloc : 
+                    blocs.cassage(obj)
+            balle.deplacement()
+            window.after(10, jeu)
 
-def rejouer():
-    initialisation()
+    window.bind("<Key>", mouvement)
+    tk.mainloop()
 
-window.bind("<Key>", mouvement)
-tk.mainloop()
-
+fenetre_menu()
