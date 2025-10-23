@@ -21,13 +21,18 @@ from tkinter import messagebox
 
 # Création de la fenêtre tkinter 
 
+
 window = tk.Tk()
 window.title('Casse-Brique')
-window.geometry('700x800')
+largeur = window.winfo_screenwidth()
+hauteur = window.winfo_screenheight()
+window.geometry(f'700x800+{int((largeur/2)-350)}+{int((hauteur/2)-400)}')
 window.overrideredirect(True)
 # window.attributes('-fullscreen', True)
 
-frame_info = tk.Frame(window, width=700, height=800, bg='black')
+
+frame_info = tk.Frame(window, width=700, height=200, bg='grey')
+
 frame_info.pack(fill='both')
 
 label_vies=tk.Label(frame_info, text='Nombre de vie : ',fg='white',bg='black')
@@ -99,7 +104,6 @@ def fenetre_menu():
 
         if event.keysym == 'Right':
             raquette.droite()
-
     def stop(event):
         global raquette
         raquette.stop()
