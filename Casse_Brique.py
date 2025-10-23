@@ -45,7 +45,7 @@ def fenetre_menu():
     raquette = None
     balle = None
     blocs = None
-    vies = 3
+    vies = 1
     diff = None
 
     def retour_menu():
@@ -53,16 +53,20 @@ def fenetre_menu():
         fenetre_menu()
         
     def rejouer():
-        canvas.destroy()
         initialisation()
 
     # Démarrage du jeu (à la pression du bouton Jouer)
     def initialisation():
         # Paramètrages des variables globales
-        global canvas, raquette, balle, blocs, vies, diff, frame_canvas
-        vies = menu.nb_vies()
-        diff = menu.difficulte() 
-
+        global canvas, raquette, balle, blocs, vies, diff, frame_canvas,parametre
+        try:
+            vies = menu.nb_vies()
+            diff = menu.difficulte() 
+            parametre=[vies,diff]
+        except Exception as e:
+            vies=parametre[0]
+            diff=parametre[1]
+            
         frame_canvas = Jeu.jeu(window, vies)
         canvas = frame_canvas.lecanvas()
         

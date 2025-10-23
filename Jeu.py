@@ -19,7 +19,7 @@ class jeu :
         self.__canvas = tk.Canvas(self.__frame_canvas, bg='light grey', width=700, height=800)
         self.__canvas.pack(fill='both')
 
-        self.__canvas_fin=tk.Canvas(self.__canvas)
+        self.__canvas_fin = tk.Frame(self.__canvas)
 
         self.__canvas.create_line(0, 0, 700, 0, fill='green', width=10)
         self.__canvas.create_line(0, 0, 0, 800, fill='green', width=10)
