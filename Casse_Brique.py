@@ -49,7 +49,6 @@ btn_close.pack(side='right')
 def fenetre_menu():
 
     # Création du menu
-    menu = Menu.menu(window)
     menu = Menu.lemenu(window)
 
     # Initialisation des variables globales
@@ -73,8 +72,6 @@ def fenetre_menu():
         
         # Création des objets 
         raquette = Raquette.palet(canvas)
-        balle = Balle.balle(canvas)
-        blocs = Blocs.blocs(canvas, diff)
         balle = Balle.laballe(canvas)
         blocs = Blocs.lesblocs(canvas, diff)
         
@@ -88,7 +85,6 @@ def fenetre_menu():
         fenetre_menu()
     
     def rejouer():
-        frame_canvas.destruction()
         canvas.destroy()
         initialisation()
     
@@ -113,11 +109,9 @@ def fenetre_menu():
         if idbloc == -1:
             vies -= 1
             balle.del_balle()
-            balle=Balle.balle(canvas)
             balle=Balle.laballe(canvas)
             print(vies) #TODO Label
             if vies <= 0:
-                frame_canvas.restart(retour_menu,window)
                 frame_canvas.restart(retour_menu,rejouer,window)
                 # if retry:
                 #     frame_canvas.frame().destroy()                  #TODO WIP rejouer
