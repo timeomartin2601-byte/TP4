@@ -46,7 +46,8 @@ class palet:
         '''
         
         '''
-        self.__x+=self.__depl
+        if self.__x+abs(self.__depl) < 700 or self.__x-abs(self.__depl)>0:
+            self.__x+=self.__depl
         self.__canvas.coords(self.__paletg, self.__x, self.__y, self.__x+(self.__dim[0]/2), self.__y+self.__dim[1])
         self.__canvas.coords(self.__paletd, self.__x+(self.__dim[0]/2), self.__y, self.__x+self.__dim[0], self.__y+self.__dim[1])
 
