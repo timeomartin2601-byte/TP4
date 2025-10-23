@@ -6,7 +6,7 @@ TODO Faire en sorte de pouvoir être rouvert
 '''
 import tkinter as tk
 
-class menu :
+class lemenu :
     def __init__(self, fenetre):
         self.__vies = 3
         self.__diff = 1

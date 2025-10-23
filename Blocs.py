@@ -5,7 +5,7 @@ Martin Timeo, Braz Arno
 '''
 import tkinter as tk
 
-class blocs:
+class lesblocs:
     def __init__(self, canvas, etat = 1): 
         """
         Entrée : etat - int, réglable de 1 à 3 nombre de coups pour casser un bloc
