@@ -35,3 +35,5 @@ class palet:
             self.mur_g-=20
             self.mur_d-=20
             # print(self.mur_g)
+
+#
