@@ -22,7 +22,7 @@ from tkinter import messagebox
 
 window = tk.Tk()
 window.title('Casse-Brique')
-window.geometry('700x800')
+window.geometry('700x800+610+140')
 window.overrideredirect(True)
 # window.attributes('-fullscreen', True)
 
