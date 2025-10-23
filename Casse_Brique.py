@@ -34,22 +34,26 @@ from tkinter import messagebox
 window = tk.Tk()
 window.title('Casse-Brique')
 window.geometry('700x800')
+window.overrideredirect(True)
 # window.attributes('-fullscreen', True)
 
 
 frame_info = tk.Frame(window, width=700, height=800, bg='grey')
 frame_info.pack(fill='both')
 
+
 btn_close = tk.Button(frame_info, text="X", command=window.destroy)
 btn_close.pack(side='right')
 
 
+menu = Menu.lemenu(window)
 
 
 def fenetre_menu():
 
     # Création du menu
     menu = Menu.menu(window)
+
 
     # Initialisation des variables globales
     canvas = None
@@ -74,6 +78,8 @@ def fenetre_menu():
         raquette = Raquette.palet(canvas)
         balle = Balle.balle(canvas)
         blocs = Blocs.blocs(canvas, diff)
+        balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
+        blocs = Blocs.lesblocs(canvas, diff)
         
         jeu()
 
@@ -87,6 +93,7 @@ def fenetre_menu():
     def rejouer():
         canvas.destroy()
         initialisation()
+
     
     # Programme Principal
 
@@ -110,6 +117,7 @@ def fenetre_menu():
             vies -= 1
             balle.del_balle()
             balle=Balle.balle(canvas)
+            balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
             print(vies) #TODO Label
             if vies <= 0:
                 frame_canvas.restart(retour_menu,rejouer,window)
