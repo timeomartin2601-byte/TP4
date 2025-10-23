@@ -39,11 +39,11 @@ class jeu :
     def moins_vie(self):
         self.__vies -= 1
     
-    def destruction(self,detruire):
-        if detruire=='frame_canvas':
-            self.__frame_canvas.destroy()
-        elif detruire=='canvas':
-            self.__canvas.destroy()
+    def destruction(self):
+        # if detruire=='frame_canvas':
+        self.__frame_canvas.destroy()
+        # elif detruire=='canvas':
+        #     self.__canvas.destroy()
 
     def restart(self,fct_retour,fct_rejouer,window):
         self.__canvas_fin.place(x=400,y=400)

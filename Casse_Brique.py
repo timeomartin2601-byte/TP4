@@ -81,13 +81,13 @@ def fenetre_menu():
     b1 = tk.Button(menu.frame(), text='Jouer', command=initialisation)
     b1.pack()
 
-    def retour_menu(frame_menu):
+    def retour_menu():
         frame_canvas.destruction()
         fenetre_menu()
     
-    def rejouer(canvas):
-        canvas.destruction()
-        initialisation()
+    # def rejouer(canvas):
+    #     canvas.destruction()
+    #     initialisation()
 
     # Programme Principal
 
