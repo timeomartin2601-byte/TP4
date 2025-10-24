@@ -10,9 +10,6 @@ from time import perf_counter
 class jeu :
     def __init__(self, fenetre, vies = 3):
         self.__vies = vies
-        # self__debut_time=0
-        # self__fin_time=0
-        # self.__time=0
         self.__win = fenetre
         
         self.suppr_autre_win()
@@ -44,11 +41,6 @@ class jeu :
     def moins_vie(self):
         self.__vies -= 1
 
-    # def debut_timer(self):
-    #     self.debut_timer=time()
-
-    # def fin_timer(self):
-    #     self.fin_timer=time()
 
 
     def destruction(self):
