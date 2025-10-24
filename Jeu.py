@@ -6,6 +6,7 @@ TODO Faire en sorte de pouvoir être rouvert + importer score ou timer
 '''
 import tkinter as tk
 from time import perf_counter
+from PIL import ImageTk
 
 class jeu :
     def __init__(self, fenetre, vies = 3):
@@ -20,6 +21,9 @@ class jeu :
 
         self.__canvas = tk.Canvas(self.__frame_canvas, bg='black', width=700, height=800)
         self.__canvas.pack(fill='both')
+
+        # image = ImageTk.PhotoImage(file = "BackgroundCasseBrique.png")
+        # self.__canvas.create_image(10, 10, image = image, anchor = NW)
 
         self.__canvas_fin = tk.Frame(self.__canvas)
 

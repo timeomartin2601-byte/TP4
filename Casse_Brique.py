@@ -19,6 +19,7 @@ import Menu
 import Jeu
 import Score
 from tkinter import messagebox
+from PIL import ImageTk
 
 # Création de la fenêtre tkinter 
 
