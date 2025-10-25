@@ -55,12 +55,12 @@ canvas = None
 raquette = None
 balle = None
 blocs = None
-vies = 3
+vies = 1
 diff = None
 final_time=None
 score=0
-historique=[[],[],[]]
-classement=[[],[],[]]
+# historique=[[],[],[]]
+# classement=[[],[],[]]
 
 
 def fenetre_menu():
@@ -121,7 +121,7 @@ def fenetre_menu():
         raquette.stop()
 
     def jeu():
-        global canvas, raquette, balle, blocs, vies,final_time,start_time,historique,score,classement
+        global canvas, raquette, balle, blocs, vies,final_time,start_time,score
         if blocs.vide():
             messagebox.showinfo(message='Bravo!')
             #TODO
@@ -139,11 +139,11 @@ def fenetre_menu():
                 #Calcul du temps de jeu
                 end_time = time.perf_counter()
                 final_time = end_time - start_time
-
-                historique=score.historique_score(historique,diff)
-                classement=score.classement_score(classement,diff)
-                print(historique,classement)
-
+                
+                score.recup_donnée()
+                score.historique_score(diff)
+                score.classement_score(diff)
+                score.memorisation()
 
                 #Affichage bouton 'retour menu' et 'rejouer'
                 frame_canvas.restart(retour_menu,initialisation,frame_info)
