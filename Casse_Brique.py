@@ -100,11 +100,11 @@ def fenetre_menu():
         chrono.start_time()
         #rafraichie les labels 'label_vies' et 'label_timer'
         update()
-
         jeu()
 
-    b1 = tk.Button(menu.frame(), text='Jouer', command=initialisation)
-    b1.pack()
+    menu.jouer(initialisation)
+    # b1 = tk.Button(menu.frame(), text='Jouer', command=initialisation)
+    # b1.pack()
 
     # Programme Principal
 
