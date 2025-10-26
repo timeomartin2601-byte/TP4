@@ -18,6 +18,7 @@ import Raquette
 import Menu
 import Jeu
 import Score
+import Chrono
 from tkinter import messagebox
 from PIL import ImageTk
 
@@ -59,8 +60,6 @@ vies = 1
 diff = None
 final_time=None
 score=0
-# historique=[[],[],[]]
-# classement=[[],[],[]]
 
 
 def fenetre_menu():
@@ -75,7 +74,7 @@ def fenetre_menu():
     # Démarrage du jeu (à la pression du bouton Jouer)
     def initialisation():
         # Paramètrages des variables globales
-        global canvas, raquette, balle, blocs, vies, diff, frame_canvas,parametre,start_time,score
+        global canvas, raquette, balle, blocs, vies, diff, frame_canvas,parametre,score,chrono
 
         #defini le nombre de vie et la difficulté et le garde en memoire en vue d'une nouvelle game sans passer par le menu principale
         try:
@@ -95,10 +94,10 @@ def fenetre_menu():
         balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
         blocs = Blocs.lesblocs(canvas, diff)
         score=Score.lescore()
-        
-        #defini le temps t=0
-        start_time = time.perf_counter()
+        chrono=Chrono.lechrono()
 
+
+        chrono.start_time()
         #rafraichie les labels 'label_vies' et 'label_timer'
         update()
 
@@ -121,7 +120,7 @@ def fenetre_menu():
         raquette.stop()
 
     def jeu():
-        global canvas, raquette, balle, blocs, vies,final_time,start_time,score
+        global canvas, raquette, balle, blocs, vies,final_time,chrono,score
         if blocs.vide():
             messagebox.showinfo(message='Bravo!')
             #TODO
@@ -137,9 +136,13 @@ def fenetre_menu():
 
             if vies <= 0:
                 #Calcul du temps de jeu
-                end_time = time.perf_counter()
-                final_time = end_time - start_time
-                
+                chrono.stop_time()
+                chrono.recup_donnée()
+                chrono.historique_chrono1(diff)
+                chrono.classement_chrono1(diff)
+                chrono.memorisation()
+
+                #calcul et memorisation du score final 
                 score.recup_donnée()
                 score.historique_score(diff)
                 score.classement_score(diff)
@@ -165,9 +168,9 @@ def fenetre_menu():
 
     def update():
         #rafraichie les labels 'label_vies' et 'label_timer'
-        global vies,start_time,blocs,score
+        global vies,chrono,blocs,score
         label_vies.config(text='Nombre de vie : ' + str(vies))
-        label_timer.config(text='chrono : ' + str(round(time.perf_counter() - start_time, 2)) + 's')
+        label_timer.config(text='chrono : ' + str(round(chrono.le_chrono(), 2)) + 's')
         label_score.config(text='score : ' + str(score.le_score()))
 
 

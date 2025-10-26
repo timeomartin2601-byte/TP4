@@ -12,8 +12,8 @@ class lescore:
         self.__score=0
         self.__historique_score=list()
         self.__meilleurs_score=list()
-        self.__ligne1=''
-        self.__ligne2=''
+        self.__donnée_str=''
+        self.__donnée_list=list()
 
     def augmenter_score(self):
         self.__score += 10 
@@ -35,18 +35,16 @@ class lescore:
         return self.__meilleurs_score
 
     def recup_donnée(self):
-        donnée_str = open("data.txt", "r")
-        self.__ligne1=donnée_str.readline()
-        self.__ligne2=donnée_str.readline()
+        self.__donnée_str = open("data.txt", "r")
 
-        donnée_list=literal_eval("".join(list(self.__ligne1)))
-        self.__historique_score=donnée_list[0]
-        self.__meilleurs_score=donnée_list[1]
-        donnée_str.close()
+        self.__donnée_list=literal_eval("".join(list(self.__donnée_str)))
+        self.__historique_score=self.__donnée_list[0]
+        self.__meilleurs_score=self.__donnée_list[1]
+        self.__donnée_str.close()
 
     def memorisation(self):
         donnée_str = open("data.txt", "w")
-        donnée_str.write(str([self.__historique_score,self.__meilleurs_score])+"\n"+self.__ligne2)
+        donnée_str.write(str([self.__historique_score,self.__meilleurs_score,self.__donnée_list[2],self.__donnée_list[3]]))
         donnée_str.close()
 
 
