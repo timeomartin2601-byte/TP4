@@ -24,7 +24,7 @@ class lechrono:
         self.__end_time = time.perf_counter()
 
     def le_chrono(self):
-        return time.perf_counter() - self.__start_time
+        return round(time.perf_counter() - self.__start_time,2)
 
     def historique_chrono1(self,difficulté):
         if len(self.__historique_chrono[difficulté-1]) == 3 :
@@ -36,15 +36,11 @@ class lechrono:
         self.__meilleurs_chrono[difficulté-1].append(self.le_chrono())
         self.__meilleurs_chrono[difficulté-1].sort()
         if len(self.__meilleurs_chrono[difficulté-1]) >= 4 :
-            del self.__meilleurs_chrono[difficulté-1][0]
+            del self.__meilleurs_chrono[difficulté-1][-1]
         return self.__meilleurs_chrono
 
     def recup_donnée(self):
         self.__donnée_str = open("data.txt", "r")
-        # donnée_str.readline()
-        # self.__ligne2=donnée_str.readline()
-        # print(self.__ligne1)
-        # print(self.__ligne1)
         self.__donnée_list=literal_eval("".join(list(self.__donnée_str)))
         self.__historique_chrono=self.__donnée_list[2]
         self.__meilleurs_chrono=self.__donnée_list[3]

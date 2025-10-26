@@ -103,10 +103,6 @@ def fenetre_menu():
         jeu()
 
     menu.jouer(initialisation)
-    # b1 = tk.Button(menu.frame(), text='Jouer', command=initialisation)
-    # b1.pack()
-
-    # Programme Principal
 
     def mouvement(event):
         global raquette

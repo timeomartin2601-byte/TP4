@@ -6,6 +6,7 @@ TODO Faire en sorte de pouvoir être rouvert
 '''
 import tkinter as tk
 from tkinter import ttk
+from ast import literal_eval
 
 class lemenu :
     def __init__(self, fenetre):
@@ -14,15 +15,20 @@ class lemenu :
         self.__win = fenetre
         self.__vies_var = tk.IntVar(value=self.__vies)
         self.__diff_var = tk.IntVar(value=self.__diff)
+
+        self.__meilleurs_scores = [['facile'],['moyen'],['difficile']]
+        self.__donnée_str = ''
+        self.__donnée_list=''
         
         self.suppr_autre_win()
+        self.recup_donnée()
 
         # Styles de base
         couleur_fond = "#302f2f" 
         couleur_police = '#ffffff'
         police_titre=('Helvetica', 20, 'bold')
         police_sous_titre=('Helvetica', 15, 'bold')
-        police_val=('Helvetica', 10, 'bold')
+        police_val=('Helvetica', 12, 'bold')
 
         # Configuration des styles
         style = ttk.Style()
@@ -30,7 +36,7 @@ class lemenu :
         style.configure('Titre.TLabel', background = couleur_fond , foreground = couleur_police,font=police_titre)
         style.configure('vies.TLabel',background = couleur_fond , foreground = couleur_police,font=police_sous_titre)
         style.configure('statue_val.TLabel',background = couleur_fond , foreground = couleur_police,font=police_val)
-        style.configure('Jouer.TButton',background = couleur_fond , foreground = couleur_police , font=police_sous_titre)
+        style.configure('jouer.TButton', font=('Helvetica', 14, 'bold'), padding=10)
 
         self.__frame_menu = ttk.Frame(fenetre, width=700, height=800, style='Menu.TFrame')
         self.__frame_menu.pack(fill='both', expand=True)
@@ -70,6 +76,27 @@ class lemenu :
         self.__btn_jouer.pack(pady=(30, 0))
 
 
+        #Dernier record
+        stat_frame_titre = ttk.Frame(self.__frame_menu, style='Menu.TFrame')
+        stat_frame_titre.pack(pady=(40,0))
+
+        # En-têtes de colonnes
+        ttk.Label(stat_frame_titre, text='CLASSEMENT', style='vies.TLabel').pack(pady=20)
+        ttk.Label(stat_frame_titre, text='difficulté', style='vies.TLabel').pack(side='left',padx=40)
+        ttk.Label(stat_frame_titre, text='Score', style='vies.TLabel').pack(side='left',padx=40)
+        ttk.Label(stat_frame_titre, text='Chrono', style='vies.TLabel').pack(side='left',padx=40)
+
+        stat_frame = ttk.Frame(self.__frame_menu, style='Menu.TFrame')
+        stat_frame.pack(pady=20, padx=50)
+
+        for i, (difficulté,score, chrono) in enumerate(self.__meilleurs_scores):
+            # difficulté (colonne 0)
+            ttk.Label(stat_frame, text=f'{difficulté} ({i+1})', style='statue_val.TLabel').grid(row=i + 1, column=0, pady=5,padx=55)
+            # Score (colonne 1)
+            ttk.Label(stat_frame, text=f'{score}', style='statue_val.TLabel').grid(row=i + 1, column=1, pady=5,padx=55)
+            # Chrono (colonne 2)
+            ttk.Label(stat_frame, text=f'{round(chrono,2)} s', style='statue_val.TLabel').grid(row=i + 1, column=2, pady=5, padx=55)
+
     def update_vies_label(self,val):
         self.__vies_var.set(int(float(val)))
 
@@ -95,3 +122,9 @@ class lemenu :
     def nb_vies(self):
         return self.__vies_var.get()
 
+    def recup_donnée(self):
+        self.__donnée_str = open("data.txt", "r")
+        self.__donnée_list=literal_eval("".join(list(self.__donnée_str)))
+        for i in range(3):
+            self.__meilleurs_scores[i].append(self.__donnée_list[1][i][-1])
+            self.__meilleurs_scores[i].append(self.__donnée_list[3][i][1])

@@ -19,7 +19,7 @@ class jeu :
         self.__frame_canvas.pack(fill='both', expand=True)
 
 
-        self.__canvas = tk.Canvas(self.__frame_canvas, bg='black', width=700, height=800)
+        self.__canvas = tk.Canvas(self.__frame_canvas, bg="#302f2f" , width=700, height=800)
         self.__canvas.pack(fill='both')
 
         # image = ImageTk.PhotoImage(file = "BackgroundCasseBrique.png")
@@ -27,9 +27,9 @@ class jeu :
 
         self.__canvas_fin = tk.Frame(self.__canvas)
 
-        self.__canvas.create_line(0, 0, 700, 0, fill='black', width=10)
-        self.__canvas.create_line(0, 0, 0, 800, fill='black', width=10)
-        self.__canvas.create_line(700, 0, 700, 800, fill='black', width=10)
+        self.__canvas.create_line(0, 0, 700, 0, fill="#302f2f" , width=10)
+        self.__canvas.create_line(0, 0, 0, 800, fill="#302f2f" , width=10)
+        self.__canvas.create_line(700, 0, 700, 800, fill="#302f2f" , width=10)
 
     def suppr_autre_win(self):
         if len(self.__win.winfo_children()) > 1:
