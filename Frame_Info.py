@@ -23,7 +23,17 @@ class info:
         btn_close = tk.Button(self.__frame_info, text="X", command=window.destroy)
         btn_close.pack(side='right')
 
+        self.__btn_retour = None
+        self.__btn_rejouer = None
+
+
     def restart(self, fct_retour, fct_rejouer,window):
-        self.__canvas_fin.place(x=400,y=400)
-        btn_retour = tk.Button(window, text='retour menu' , command=fct_retour, fg='white', bg='black').pack(side='left')
-        btn_rejouer = tk.Button(window, text='rejouer', command=fct_rejouer,fg='white', bg='black').pack(side='left')
+        self.__btn_retour = tk.Button(window, text='retour menu' , command=fct_retour, fg='white', bg='black').pack(side='left')
+        self.__btn_rejouer = tk.Button(window, text='rejouer', command=fct_rejouer,fg='white', bg='black').pack(side='left')
+
+    def nb_bouton(self):
+        return len([b for b in self.__frame_info if isinstance(b, tk.Button)])
+    
+    def detruire(self):
+        self.__btn_retour.destroy()
+        self.__btn_retour.destroy()
