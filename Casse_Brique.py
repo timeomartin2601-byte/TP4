@@ -17,6 +17,8 @@ import Balle
 import Raquette 
 import Menu
 import Jeu
+import Score
+import Chrono
 from tkinter import messagebox
 from PIL import ImageTk
 
@@ -42,36 +44,39 @@ label_vies.pack(side='left')
 label_timer=tk.Label(frame_info, text='chrono : ',fg='white',bg='black')
 label_timer.pack(side='left')
 
+label_score=tk.Label(frame_info, text='score : ',fg='white',bg='black')
+label_score.pack(side='left')
+
 btn_close = tk.Button(frame_info, text="X", command=window.destroy)
 btn_close.pack(side='right')
 
 
-def fenetre_menu():
+# Initialisation des variables globales
+canvas = None
+raquette = None
+balle = None
+blocs = None
+vies = 1
+diff = None
+final_time=None
+score=0
 
+
+def fenetre_menu():
     # Création du menu
 
     menu = Menu.lemenu(window)
-
-    # Initialisation des variables globales
-    canvas = None
-    raquette = None
-    balle = None
-    blocs = None
-    vies = 3
-    diff = None
-    final_time=None
 
     def retour_menu():
         frame_canvas.destruction()
         fenetre_menu()
         
-    def rejouer():
-        initialisation()
-
     # Démarrage du jeu (à la pression du bouton Jouer)
     def initialisation():
         # Paramètrages des variables globales
-        global canvas, raquette, balle, blocs, vies, diff, frame_canvas,parametre,start_time
+        global canvas, raquette, balle, blocs, vies, diff, frame_canvas,parametre,score,chrono
+
+        #defini le nombre de vie et la difficulté et le garde en memoire en vue d'une nouvelle game sans passer par le menu principale
         try:
             vies = menu.nb_vies()
             diff = menu.difficulte() 
@@ -80,6 +85,7 @@ def fenetre_menu():
             vies=parametre[0]
             diff=parametre[1]
             
+        
         frame_canvas = Jeu.jeu(window, vies)
         canvas = frame_canvas.lecanvas()
 
@@ -87,16 +93,16 @@ def fenetre_menu():
         raquette = Raquette.palet(canvas)
         balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
         blocs = Blocs.lesblocs(canvas, diff)
-        
-        start_time = time.perf_counter()
+        score=Score.lescore()
+        chrono=Chrono.lechrono()
 
+
+        chrono.start_time()
+        #rafraichie les labels 'label_vies' et 'label_timer'
         update()
         jeu()
 
-    b1 = tk.Button(menu.frame(), text='Jouer', command=initialisation)
-    b1.pack()
-
-    # Programme Principal
+    menu.jouer(initialisation)
 
     def mouvement(event):
         global raquette
@@ -110,7 +116,7 @@ def fenetre_menu():
         raquette.stop()
 
     def jeu():
-        global canvas, raquette, balle, blocs, vies,final_time,start_time
+        global canvas, raquette, balle, blocs, vies,final_time,chrono,score
         if blocs.vide():
             messagebox.showinfo(message='Bravo!')
             #TODO
@@ -123,22 +129,30 @@ def fenetre_menu():
             
             balle.del_balle()
             balle=Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
-            print(vies) #TODO Label
+
             if vies <= 0:
                 #Calcul du temps de jeu
-                end_time = time.perf_counter()
-                final_time = end_time - start_time
-                print(f"Program executed in: {final_time: .5f} seconds")
+                chrono.stop_time()
+                chrono.recup_donnée()
+                chrono.historique_chrono1(diff)
+                chrono.classement_chrono1(diff)
+                chrono.memorisation()
+
+                #calcul et memorisation du score final 
+                score.recup_donnée()
+                score.historique_score(diff)
+                score.classement_score(diff)
+                score.memorisation()
 
                 #Affichage bouton 'retour menu' et 'rejouer'
-                frame_canvas.restart(retour_menu,rejouer,frame_info)
+                frame_canvas.restart(retour_menu,initialisation,frame_info)
                 return
             window.after(1000, jeu)
-            #TODO La gestion des vies
         else:
             if idbloc!= 0 and len(idbloc)>0:
                 for obj in idbloc : 
-                    blocs.cassage(obj)
+                    if blocs.cassage(obj)==True:
+                        score.augmenter_score()
             update()
             balle.deplacement()
             raquette.mouv()
@@ -149,9 +163,11 @@ def fenetre_menu():
 
 
     def update():
-        global vies,start_time
+        #rafraichie les labels 'label_vies' et 'label_timer'
+        global vies,chrono,blocs,score
         label_vies.config(text='Nombre de vie : ' + str(vies))
-        label_timer.config(text='chrono : ' + str(round(time.perf_counter() - start_time, 2)) + 's')
+        label_timer.config(text='chrono : ' + str(round(chrono.le_chrono(), 2)) + 's')
+        label_score.config(text='score : ' + str(score.le_score()))
 
 
     tk.mainloop()
