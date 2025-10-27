@@ -130,8 +130,15 @@ def fenetre_menu():
     def jeu():
         global canvas, raquette, balle, blocs, vies,final_time,chrono,score
         if blocs.vide():
-            messagebox.showinfo(message='Bravo!')
-            #TODO
+            #Calcul du temps de jeu
+            enregistrement_chrono()
+
+            #calcul et memorisation du score final 
+            enregistrement_score()
+
+            #detruit le canvas de jeu et affiche le menu de fin 
+            menu_fin('VICTOIRE')
+
             return
         idbloc = balle.id_col()
         if idbloc == -1:
@@ -143,29 +150,15 @@ def fenetre_menu():
             balle=Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
 
             if vies <= 0:
-                #Calcul du temps de jeu
+                #Calcul du temps de jeu (le chrono n'est pas enregistrer car le joueur a perdu)
                 chrono.stop_time()
-                chrono.recup_donnée()
-                chrono.historique_chrono1(diff)
-                chrono.classement_chrono1(diff)
-                chrono.memorisation()
 
                 #calcul et memorisation du score final 
-                score.recup_donnée()
-                score.historique_score(diff)
-                score.classement_score(diff)
-                score.memorisation()
+                enregistrement_score()
 
-                #Affichage bouton 'retour menu' et 'rejouer'
-                frame_canvas.destruction()
+                #detruit le canvas de jeu et affiche le menu de fin 
+                menu_fin('GAME OVER')
 
-                menu_fin=Menufin.lemenu_fin(window,diff)
-                menu_fin.text_titre('GAME OVER')
-                menu_fin.nbr_chrono(chrono.le_chrono())
-                menu_fin.nbr_score(score.le_score())
-
-
-                menu_fin.restart(retour_menu,initialisation)
                 return
             window.after(1000, jeu)
         else:
@@ -189,6 +182,30 @@ def fenetre_menu():
         # label_timer.config(text='chrono : ' + str(round(chrono.le_chrono(), 2)) + 's')
         # label_score.config(text='score : ' + str(score.le_score()))
         frame_info.update_labels(vies, chrono.le_chrono(), score.le_score())
+
+    def menu_fin(message):
+        #detruit le canvas de jeu et affiche le menu de fin 
+        frame_canvas.destruction()
+        menu_fin=Menufin.lemenu_fin(window,diff)
+        menu_fin.text_titre(f'{message}')
+        menu_fin.nbr_chrono(chrono.le_chrono())
+        menu_fin.nbr_score(score.le_score())
+        menu_fin.restart(retour_menu,initialisation)
+
+    def enregistrement_score():
+        #calcul et enregistrement du score final 
+        score.recup_donnée()
+        score.historique_score(diff)
+        score.classement_score(diff)
+        score.memorisation()
+
+    def enregistrement_chrono():
+        #Calcul et enregistrement du chrono
+        chrono.stop_time()
+        chrono.recup_donnée()
+        chrono.historique_chrono1(diff)
+        chrono.classement_chrono1(diff)
+        chrono.memorisation()
 
     tk.mainloop()
 
