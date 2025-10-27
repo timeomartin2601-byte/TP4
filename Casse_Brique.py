@@ -19,6 +19,7 @@ import Menu
 import Jeu
 import Score
 import Chrono
+import Menufin
 from tkinter import messagebox
 from PIL import ImageTk
 
@@ -30,7 +31,7 @@ window.title('Casse-Brique')
 largeur = window.winfo_screenwidth()
 hauteur = window.winfo_screenheight()
 window.geometry(f'700x800+{int((largeur/2)-350)}+{int((hauteur/2)-400)}')
-window.overrideredirect(True)
+# window.overrideredirect(True)
 # window.attributes('-fullscreen', True)
 
 
@@ -145,7 +146,15 @@ def fenetre_menu():
                 score.memorisation()
 
                 #Affichage bouton 'retour menu' et 'rejouer'
-                frame_canvas.restart(retour_menu,initialisation,frame_info)
+                frame_canvas.destruction()
+
+                menu_fin=Menufin.lemenu_fin(window,diff)
+                menu_fin.text_titre('GAME OVER')
+                menu_fin.nbr_chrono(chrono.le_chrono())
+                menu_fin.nbr_score(score.le_score())
+
+
+                menu_fin.restart(retour_menu,initialisation)
                 return
             window.after(1000, jeu)
         else:
