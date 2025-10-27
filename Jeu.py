@@ -22,7 +22,7 @@ class jeu :
         self.__canvas = tk.Canvas(self.__frame_canvas, bg="#302f2f" , width=700, height=800)
         self.__canvas.pack(fill='both')
 
-        self.__canvas_fin = tk.Frame(self.__canvas)
+        # self.__canvas_fin = tk.Frame(self.__canvas)
 
         self.__canvas.create_line(0, 0, 700, 0, fill="#302f2f" , width=10)
         self.__canvas.create_line(0, 0, 0, 800, fill="#302f2f" , width=10)
@@ -48,7 +48,7 @@ class jeu :
         self.__frame_canvas.destroy()
 
     def restart(self,fct_retour,fct_rejouer,window):
-        self.__canvas_fin.place(x=400,y=400)
+        # self.__canvas_fin.place(x=400,y=400)
         btn_retour = tk.Button(window,text='retour menu' ,command=fct_retour,fg='white',bg='black').pack(side='left')
         btn_rejouer = tk.Button(window,text='rejouer' ,command=fct_rejouer,fg='white',bg='black').pack(side='left')
 
