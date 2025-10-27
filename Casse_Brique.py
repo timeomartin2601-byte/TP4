@@ -17,6 +17,7 @@ import Balle
 import Raquette 
 import Menu
 import Jeu
+import Frame_Info
 import Score
 import Chrono
 import Menufin
@@ -34,22 +35,23 @@ window.geometry(f'700x800+{int((largeur/2)-350)}+{int((hauteur/2)-400)}')
 # window.overrideredirect(True)
 # window.attributes('-fullscreen', True)
 
+frame_info = Frame_Info.info(window)
 
-frame_info = tk.Frame(window, width=700, height=200, bg='grey')
+# frame_info = tk.Frame(window, width=700, height=200, bg='grey')
 
-frame_info.pack(fill='both')
+# frame_info.pack(fill='both')
 
-label_vies=tk.Label(frame_info, text='Nombre de vie : ',fg='white',bg='black')
-label_vies.pack(side='left')
+# label_vies=tk.Label(frame_info, text='Nombre de vie : ',fg='white',bg='black')
+# label_vies.pack(side='left')
 
-label_timer=tk.Label(frame_info, text='chrono : ',fg='white',bg='black')
-label_timer.pack(side='left')
+# label_timer=tk.Label(frame_info, text='chrono : ',fg='white',bg='black')
+# label_timer.pack(side='left')
 
-label_score=tk.Label(frame_info, text='score : ',fg='white',bg='black')
-label_score.pack(side='left')
+# label_score=tk.Label(frame_info, text='score : ',fg='white',bg='black')
+# label_score.pack(side='left')
 
-btn_close = tk.Button(frame_info, text="X", command=window.destroy)
-btn_close.pack(side='right')
+# btn_close = tk.Button(frame_info, text="X", command=window.destroy)
+# btn_close.pack(side='right')
 
 
 # Initialisation des variables globales
@@ -69,13 +71,18 @@ def fenetre_menu():
     menu = Menu.lemenu(window)
 
     def retour_menu():
+        if frame_info.btn_presents():
+            frame_info.detruire()
         frame_canvas.destruction()
         fenetre_menu()
-        
+
     # Démarrage du jeu (à la pression du bouton Jouer)
     def initialisation():
         # Paramètrages des variables globales
         global canvas, raquette, balle, blocs, vies, diff, frame_canvas,parametre,score,chrono
+        
+        if frame_info.btn_presents():
+            frame_info.detruire()
 
         #defini le nombre de vie et la difficulté et le garde en memoire en vue d'une nouvelle game sans passer par le menu principale
         try:
@@ -89,6 +96,10 @@ def fenetre_menu():
         
         frame_canvas = Jeu.jeu(window, vies)
         canvas = frame_canvas.lecanvas()
+
+        #Affichage bouton 'retour menu' et 'rejouer'
+        frame_info.restart(retour_menu,initialisation)
+        # frame_canvas.restart(retour_menu,initialisation,frame_info)
 
         # Création des objets 
         raquette = Raquette.palet(canvas)
@@ -174,10 +185,10 @@ def fenetre_menu():
     def update():
         #rafraichie les labels 'label_vies' et 'label_timer'
         global vies,chrono,blocs,score
-        label_vies.config(text='Nombre de vie : ' + str(vies))
-        label_timer.config(text='chrono : ' + str(round(chrono.le_chrono(), 2)) + 's')
-        label_score.config(text='score : ' + str(score.le_score()))
-
+        # label_vies.config(text='Nombre de vie : ' + str(vies))
+        # label_timer.config(text='chrono : ' + str(round(chrono.le_chrono(), 2)) + 's')
+        # label_score.config(text='score : ' + str(score.le_score()))
+        frame_info.update_labels(vies, chrono.le_chrono(), score.le_score())
 
     tk.mainloop()
 
