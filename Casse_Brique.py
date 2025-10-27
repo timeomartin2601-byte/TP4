@@ -103,7 +103,7 @@ def fenetre_menu():
 
         # Création des objets 
         raquette = Raquette.palet(canvas)
-        balle = Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
+        balle = Balle.laballe(canvas, raquette.id_palet())
         blocs = Blocs.lesblocs(canvas, diff)
         score=Score.lescore()
         chrono=Chrono.lechrono()
@@ -147,7 +147,7 @@ def fenetre_menu():
             update()
             
             balle.del_balle()
-            balle=Balle.laballe(canvas, raquette.id_paletg(), raquette.id_paletd())
+            balle=Balle.laballe(canvas, raquette.id_palet())
 
             if vies <= 0:
                 #Calcul du temps de jeu (le chrono n'est pas enregistrer car le joueur a perdu)

@@ -13,8 +13,7 @@ class palet:
         '''
         self.__canvas = canvas
         self.__x, self.__y, self.__dim = x, y, dim
-        self.__paletg = self.__canvas.create_rectangle(x, y, x+(dim[0]/2), y+dim[1], fill="red")
-        self.__paletd = self.__canvas.create_rectangle(x+(dim[0]/2), y, x+dim[0], y+dim[1], fill="red")
+        self.__palet = self.__canvas.create_rectangle(x, y, x+dim[0], y+dim[1], fill="red")
         self.__depl = 0
 
     def droite(self):
@@ -39,17 +38,10 @@ class palet:
         if self.__x + self.__depl > 0 and self.__x + self.__dim[0] + self.__depl < 700 :
             self.__x+=self.__depl
 
-        self.__canvas.coords(self.__paletg, self.__x, self.__y, self.__x+(self.__dim[0]/2), self.__y+self.__dim[1])
-        self.__canvas.coords(self.__paletd, self.__x+(self.__dim[0]/2), self.__y, self.__x+self.__dim[0], self.__y+self.__dim[1])
-
-    def id_paletg(self):
-        '''
-        
-        '''
-        return self.__paletg
+        self.__canvas.coords(self.__palet, self.__x, self.__y, self.__x+self.__dim[0], self.__y+self.__dim[1])
     
-    def id_paletd(self):
+    def id_palet(self):
         '''
         
         '''
-        return self.__paletd
+        return self.__palet
