@@ -124,9 +124,9 @@ class lemenu_fin:
         self.__donnée_str = open("data.txt", "r")
         self.__donnée_list=literal_eval("".join(list(self.__donnée_str)))
         for i in range(3):
-            self.__meilleurs_scores[i].append(self.__donnée_list[1][difficulté-1][i])
+            self.__meilleurs_scores[i].append(self.__donnée_list[1][difficulté-1][-1-i])
             self.__meilleurs_scores[i].append(self.__donnée_list[3][difficulté-1][i])
 
-            self.__historique_scores[i].append(self.__donnée_list[0][difficulté-1][i])
+            self.__historique_scores[i].append(self.__donnée_list[0][difficulté-1][-1-i])
             self.__historique_scores[i].append(self.__donnée_list[2][difficulté-1][i])
 

@@ -45,8 +45,3 @@ class jeu :
 
     def destruction(self):
         self.__frame_canvas.destroy()
-
-    def restart(self,fct_retour,fct_rejouer,window):
-        btn_retour = tk.Button(window,text='retour menu' ,command=fct_retour,fg='white',bg='black').pack(side='left')
-        btn_rejouer = tk.Button(window,text='rejouer' ,command=fct_rejouer,fg='white',bg='black').pack(side='left')
-

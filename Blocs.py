@@ -16,7 +16,7 @@ class lesblocs:
         blocs = dict()
         for l in range(8):
             for c in range(5):
-                blocs[self.__canvas.create_rectangle(5 + (87 * l), 22 + (60 * c), 87 + (87 * l), 74 + (60 * c), fill="blue")] = etat 
+                blocs[self.__canvas.create_rectangle(5 + (87 * l), 22 + (60 * c), 87 + (87 * l), 74 + (60 * c), fill="#1066B6")] = etat 
         self.__blocs = blocs
 
 

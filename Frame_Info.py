@@ -12,24 +12,24 @@ class info:
         self.__frame_info.pack(fill='both')
 
         self.__label_vies=tk.Label(self.__frame_info, text='Nombre de vie : ',fg='white',bg='black')
-        self.__label_vies.pack(side='left')
+        self.__label_vies.pack(side='left',padx=5)
 
         self.__label_timer=tk.Label(self.__frame_info, text='chrono : ',fg='white',bg='black')
-        self.__label_timer.pack(side='left')
+        self.__label_timer.pack(side='left',padx=5)
 
         self.__label_score=tk.Label(self.__frame_info, text='score : ',fg='white',bg='black')
-        self.__label_score.pack(side='left')
+        self.__label_score.pack(side='left',padx=5)
 
         btn_close = tk.Button(self.__frame_info, text="X", command=window.destroy)
-        btn_close.pack(side='right')
+        btn_close.pack(side='right',padx=5)
 
         self.__btn_retour = None
         self.__btn_rejouer = None
 
 
     def restart(self, fct_retour, fct_rejouer):
-        self.__btn_retour = tk.Button(self.__frame_info, text='retour menu' , command=fct_retour, fg='white', bg='black').pack(side='left')
-        self.__btn_rejouer = tk.Button(self.__frame_info, text='rejouer', command=fct_rejouer,fg='white', bg='black').pack(side='left')
+        self.__btn_retour = tk.Button(self.__frame_info, text='retour menu' , command=fct_retour, fg='white', bg='black').pack(side='left',padx=5)
+        self.__btn_rejouer = tk.Button(self.__frame_info, text='rejouer', command=fct_rejouer,fg='white', bg='black').pack(side='left',padx=5)
 
     # def nb_bouton(self):
     #     return len([b for b in self.__frame_info if isinstance(b, tk.Button)])

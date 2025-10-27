@@ -144,6 +144,7 @@ def fenetre_menu():
         if idbloc == -1:
             vies -= 1
 
+            score.mort()
             update()
             
             balle.del_balle()
@@ -181,7 +182,7 @@ def fenetre_menu():
         # label_vies.config(text='Nombre de vie : ' + str(vies))
         # label_timer.config(text='chrono : ' + str(round(chrono.le_chrono(), 2)) + 's')
         # label_score.config(text='score : ' + str(score.le_score()))
-        frame_info.update_labels(vies, chrono.le_chrono(), score.le_score())
+        frame_info.update_labels(vies, chrono.le_chrono(), score.le_score(chrono.le_chrono()))
 
     def menu_fin(message):
         #detruit le canvas de jeu et affiche le menu de fin 
@@ -189,14 +190,14 @@ def fenetre_menu():
         menu_fin=Menufin.lemenu_fin(window,diff)
         menu_fin.text_titre(f'{message}')
         menu_fin.nbr_chrono(chrono.le_chrono())
-        menu_fin.nbr_score(score.le_score())
+        menu_fin.nbr_score(score.le_score(chrono.le_chrono()))
         menu_fin.restart(retour_menu,initialisation)
 
     def enregistrement_score():
         #calcul et enregistrement du score final 
         score.recup_donnée()
-        score.historique_score(diff)
-        score.classement_score(diff)
+        score.historique_score(diff,chrono.le_chrono())
+        score.classement_score(diff,chrono.le_chrono())
         score.memorisation()
 
     def enregistrement_chrono():

@@ -11,7 +11,7 @@ from ast import literal_eval
 class lemenu :
     def __init__(self, fenetre):
         self.__vies = 3
-        self.__diff = 1
+        self.__diff = 2
         self.__win = fenetre
         self.__vies_var = tk.IntVar(value=self.__vies)
         self.__diff_var = tk.IntVar(value=self.__diff)
@@ -42,7 +42,7 @@ class lemenu :
         self.__frame_menu.pack(fill='both', expand=True)
 
         # Titre
-        ttk.Label(self.__frame_menu, text='Jeu du Casse-Brique !', style='Titre.TLabel').pack(pady=(40, 20))
+        ttk.Label(self.__frame_menu, text='Jeu du Casse-Brique', style='Titre.TLabel').pack(pady=(40, 20))
 
 
 
@@ -91,7 +91,7 @@ class lemenu :
 
         for i, (difficulté,score, chrono) in enumerate(self.__meilleurs_scores):
             # difficulté (colonne 0)
-            ttk.Label(stat_frame, text=f'{difficulté} ({i+1})', style='statue_val.TLabel').grid(row=i + 1, column=0, pady=5,padx=55)
+            ttk.Label(stat_frame, text=f'{difficulté} ({i+1})', style='statue_val.TLabel').grid(row=i + 1, column=0, pady=5,padx=45)
             # Score (colonne 1)
             ttk.Label(stat_frame, text=f'{score}', style='statue_val.TLabel').grid(row=i + 1, column=1, pady=5,padx=55)
             # Chrono (colonne 2)
@@ -127,4 +127,4 @@ class lemenu :
         self.__donnée_list=literal_eval("".join(list(self.__donnée_str)))
         for i in range(3):
             self.__meilleurs_scores[i].append(self.__donnée_list[1][i][-1])
-            self.__meilleurs_scores[i].append(self.__donnée_list[3][i][1])
+            self.__meilleurs_scores[i].append(self.__donnée_list[3][i][0])

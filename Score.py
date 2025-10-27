@@ -18,17 +18,24 @@ class lescore:
     def augmenter_score(self):
         self.__score += 10 
 
-    def le_score(self):
-        return self.__score
+    def mort(self):
+        self.__score-=50
 
-    def historique_score(self,difficulté):
+    # def score_temps(self,chrono):
+    #     self.__score=self.__score
+
+
+    def le_score(self,chrono):
+        return round(self.__score-0.5*chrono,2)
+
+    def historique_score(self,difficulté,chrono):
         if len(self.__historique_score[difficulté-1]) == 3 :
             del self.__historique_score[difficulté-1][0]
-        self.__historique_score[difficulté-1].append(self.__score)
+        self.__historique_score[difficulté-1].append(round(self.__score-0.5*chrono,2))
         return self.__historique_score
         
-    def classement_score(self,difficulté):
-        self.__meilleurs_score[difficulté-1].append(self.__score)
+    def classement_score(self,difficulté,chrono):
+        self.__meilleurs_score[difficulté-1].append(round(self.__score-0.5*chrono,2))
         self.__meilleurs_score[difficulté-1].sort()
         if len(self.__meilleurs_score[difficulté-1]) >= 4 :
             del self.__meilleurs_score[difficulté-1][0]
