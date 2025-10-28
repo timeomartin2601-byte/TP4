@@ -84,12 +84,12 @@ def fenetre_menu():
         if frame_info.btn_presents():
             frame_info.detruire()
 
-        #defini le nombre de vie et la difficulté et le garde en memoire en vue d'une nouvelle game sans passer par le menu principale
-        try:
+        # Defini le nombre de vie et la difficulté et le garde en memoire en vue d'une nouvelle game sans passer par le menu principale
+        if menu.existe():
             vies = menu.nb_vies()
             diff = menu.difficulte() 
             parametre=[vies,diff]
-        except:
+        else:
             vies=parametre[0]
             diff=parametre[1]
             

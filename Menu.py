@@ -128,3 +128,6 @@ class lemenu :
         for i in range(3):
             self.__meilleurs_scores[i].append(self.__donnée_list[1][i][-1])
             self.__meilleurs_scores[i].append(self.__donnée_list[3][i][0])
+
+    def existe(self):
+        return self.__frame_menu.winfo_exists()
