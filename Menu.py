@@ -9,6 +9,7 @@ from ast import literal_eval
 
 class lemenu :
     def __init__(self, fenetre):
+        ''' Initialise l'objet menu '''
         self.__vies = 1
         self.__diff = 1
         self.__win = fenetre
@@ -43,8 +44,6 @@ class lemenu :
         # Titre
         ttk.Label(self.__frame_menu, text='Jeu du Casse-Brique', style='Titre.TLabel').pack(pady=(40, 20))
 
-
-
         # Nombre de vies
         ttk.Label(self.__frame_menu, text='Nombre de vies (1 à 5) :',style='vies.TLabel').pack(pady=(10, 5))
 
@@ -56,7 +55,6 @@ class lemenu :
 
         self.__vies_label = ttk.Label(vies_frame, textvariable=self.__vies_var, style='statue_val.TLabel')
         self.__vies_label.pack(side='left')
-
 
         # Niveau de difficulté
         ttk.Label(self.__frame_menu, text='Niveau de difficulté (1 à 3) :',style='vies.TLabel').pack(pady=(10, 5))
@@ -73,7 +71,6 @@ class lemenu :
         #boutton Jouer
         self.__btn_jouer = ttk.Button(self.__frame_menu, text='Nouvelle Partie', style='jouer.TButton')
         self.__btn_jouer.pack(pady=(30, 0))
-
 
         #Dernier record
         stat_frame_titre = ttk.Frame(self.__frame_menu, style='Menu.TFrame')
@@ -97,17 +94,26 @@ class lemenu :
             ttk.Label(stat_frame, text=f'{round(chrono,2)} s', style='statue_val.TLabel').grid(row=i + 1, column=2, pady=5, padx=55)
 
     def update_vies_label(self,val):
+        ''' Mis à jour du Label vies à chaque appel de la fonction '''
         self.__vies_var.set(int(float(val)))
 
     def update_diff_label(self,val):
+        ''' Mis à jour du Label difficulté à chaque appel de la fonction '''
         self.__diff_var.set(int(float(val)))
 
     def jouer(self,fct):
+        ''' 
+        Association au bouton rejouer de la fonction d'entrée
+        Entrée : fct - fonction, fonction rejouer à associer au bouton
+        '''
         self.__fct_jouer = fct
         if self.__btn_jouer:
             self.__btn_jouer.config(command=self.__fct_jouer)
 
     def suppr_autre_win(self):
+        '''
+        Détruit les fenêtres existantes à l'exception de la frame info
+        '''
         if len(self.__win.winfo_children()) > 1:
             for frame in self.__win.winfo_children()[1:]:
                 frame.destroy()
@@ -116,12 +122,15 @@ class lemenu :
         return self.__frame_menu
     
     def difficulte(self):
+        ''' Renvoie la difficulté '''
         return self.__diff_var.get()
 
     def nb_vies(self):
+        ''' Renvoie le nombre de vies restantes '''
         return self.__vies_var.get()
 
     def recup_donnée(self):
+        ''' Récupère les données des meilleurs scores '''
         self.__donnée_str = open("data.txt", "r")
         self.__donnée_list=literal_eval("".join(list(self.__donnée_str)))
         for i in range(3):
@@ -129,4 +138,8 @@ class lemenu :
             self.__meilleurs_scores[i].append(self.__donnée_list[3][i][0])
 
     def existe(self):
+        '''
+        Renvoie si la frame menu existe 
+        Sortie : Bool, True si frame_menu existe False sinon
+        '''
         return self.__frame_menu.winfo_exists()
