@@ -2,10 +2,10 @@
 Casse-Brique : Programme principal
 Braz Arno, Martin Timeo
 16/10/25
-TODO :  - Gestion des vies
-        - Prévoir un bouton rejouer à la fin
+TODO :  - Gestion des vies -> ok
+        - Prévoir un bouton rejouer à la fin -> ok
         - Idéalement remplacer un max de forme par des images pour que ce soit plus beau et agréable à jouer
-        - label timer,vies
+        - label timer,vies -> ok 
 '''
 
 # Importation des modules et des classes
@@ -25,7 +25,6 @@ from tkinter import messagebox
 from PIL import ImageTk
 
 # Création de la fenêtre tkinter 
-
 
 window = tk.Tk()
 window.title('Casse-Brique')
@@ -49,17 +48,20 @@ score=0
 
 
 def fenetre_menu():
-    # Création du menu
+    ''' Création du menu '''
 
     menu = Menu.lemenu(window)
 
     def retour_menu():
+        ''' Renvoie le joueur au menu principal '''
         frame_info.detruire()
         frame_canvas.destruction()
         fenetre_menu()
 
     # Démarrage du jeu (à la pression du bouton Jouer)
     def initialisation():
+        ''' Initialisation de la fenêtre de jeu, des paramètres et des objets '''
+
         # Paramètrages des variables globales
         global canvas, raquette, balle, blocs, vies, diff, frame_canvas,parametre,score,chrono
         
@@ -81,7 +83,6 @@ def fenetre_menu():
 
         #Affichage bouton 'retour menu' et 'rejouer'
         frame_info.restart(retour_menu,initialisation)
-        # frame_canvas.restart(retour_menu,initialisation,frame_info)
 
         # Création des objets 
         raquette = Raquette.palet(canvas)
@@ -89,7 +90,6 @@ def fenetre_menu():
         blocs = Blocs.lesblocs(canvas, diff)
         score=Score.lescore()
         chrono=Chrono.lechrono()
-
 
         chrono.start_time()
         #rafraichie les labels 'label_vies' et 'label_timer'
@@ -99,17 +99,28 @@ def fenetre_menu():
     menu.jouer(initialisation)
 
     def mouvement(event):
+        '''
+        A la pression d'une flèche, on appelle les modifications de vitesse nécessaire à la raquette
+        '''
         global raquette
         if event.keysym == 'Left':
             raquette.gauche()
 
         if event.keysym == 'Right':
             raquette.droite()
+
     def stop(event):
+        '''
+        Au relachement du bouton par le joueur, la fonction remet la vitesse de la raquette à 0
+        '''
         global raquette
         raquette.stop()
 
     def jeu():
+        '''
+        Gestion des événements liés au jeu
+        Sortie : None, arrêt du jeu
+        '''
         global canvas, raquette, balle, blocs, vies,final_time,chrono,score
         if blocs.vide():
             #Calcul du temps de jeu
@@ -163,15 +174,12 @@ def fenetre_menu():
 
 
     def update():
-        #rafraichie les labels 'label_vies' et 'label_timer'
+        ''' Rafraichie les labels 'label_vies' et 'label_timer' '''
         global vies,chrono,blocs,score
-        # label_vies.config(text='Nombre de vie : ' + str(vies))
-        # label_timer.config(text='chrono : ' + str(round(chrono.le_chrono(), 2)) + 's')
-        # label_score.config(text='score : ' + str(score.le_score()))
         frame_info.update_labels(vies, chrono.le_chrono(), score.le_score(chrono.le_chrono()))
 
     def menu_fin(message):
-        #detruit le canvas de jeu et affiche le menu de fin 
+        ''' Detruit le canvas de jeu et affiche le menu de fin ''' 
         frame_canvas.destruction()
         menu_fin=Menufin.lemenu_fin(window,diff)
         menu_fin.text_titre(f'{message}')
@@ -180,14 +188,14 @@ def fenetre_menu():
         menu_fin.restart(retour_menu,initialisation)
 
     def enregistrement_score():
-        #calcul et enregistrement du score final 
+        ''' Calcul et enregistrement du score final '''
         score.recup_donnée()
         score.historique_score(diff,chrono.le_chrono())
         score.classement_score(diff,chrono.le_chrono())
         score.memorisation()
 
     def enregistrement_chrono():
-        #Calcul et enregistrement du chrono
+        ''' Calcul et enregistrement du chrono '''
         chrono.stop_time()
         chrono.recup_donnée()
         chrono.historique_chrono1(diff)

@@ -2,7 +2,6 @@
 Class Raquette
 Martin Timeo, Braz Arno
 09/10/25
-TODO : Faire une raquette de la bonne taille de manière à ne pas sortir la raquette de la zone de jeu
 '''
 import tkinter as tk
 
@@ -18,22 +17,25 @@ class palet:
 
     def droite(self):
         '''
-        Déplace la raquette à droite à chaque pression de la flèche droite
+        Associe le nombre de pixel de deplacement à effectuer au prochain mouvement
         '''
         self.__depl = 10
 
     def gauche(self):
         '''
-        Déplace la raquette à gauche à chaque pression de la flèche gauche
+        Associe le nombre de pixel de deplacement à effectuer au prochain mouvement
         '''
         self.__depl = -10
 
     def stop(self):
+        '''
+        Supprime le déplacement de la balle (la balle s'arrête)
+        '''
         self.__depl = 0
 
     def mouv(self):
         '''
-        
+        Déplace la raquette
         '''
         if self.__x + self.__depl > 0 and self.__x + self.__dim[0] + self.__depl < 700 :
             self.__x+=self.__depl
@@ -42,6 +44,6 @@ class palet:
     
     def id_palet(self):
         '''
-        
+        Renvoie l'identifiant canvas du palet
         '''
         return self.__palet

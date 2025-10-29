@@ -36,6 +36,10 @@ class lesblocs:
                 return True        
 
     def vide(self):
+        '''
+        Renvoie si il a plus de blocs
+        Sortir : Bool, True il n'y a plus de blocs False sinon
+        '''
         return self.__blocs == {}
     
 

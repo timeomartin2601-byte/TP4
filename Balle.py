@@ -2,7 +2,6 @@
 Class Balle
 Martin Timeo, Braz Arno
 09/10/25
-TODO : Collisions diagonales + Fin du jeu pour y = 1080 (+ option de jeu sur les paramètres de vitesse)
 '''
 import tkinter as tk
 from random import randint
@@ -65,6 +64,9 @@ class laballe :
         return id_bloc
         
     def deplacement(self):
+        '''
+        Déplace la balle sauf si le jeu est fini
+        '''
         if not self.arret():
             self.__canvas.move(self.__balle, self.__vitx, self.__vity)
     
@@ -105,6 +107,10 @@ class laballe :
         return not self.__balle in self.__canvas.find_all()
     
     def contact_palet(self):
+        '''
+        Gestion des collision mais uniquement avec la raquette afin d'offrir plus de profondeur au jeu
+        Sortie : int ou float, la distance (normalisée entre -1 et 1) qui va servir de facteur pour le renvoie de la balle
+        '''
         paletx0, palety0, paletx1, palety1 = self.__canvas.coords(self.__palet)
         centre_palet = (paletx0+paletx1)/2
         centre_balle = (self.__x0+self.__x1)/2

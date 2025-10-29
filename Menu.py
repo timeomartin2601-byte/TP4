@@ -2,7 +2,6 @@
 Class Menu
 Martin Timeo, Braz Arno
 19/10/25
-TODO Faire en sorte de pouvoir être rouvert
 '''
 import tkinter as tk
 from tkinter import ttk

@@ -2,7 +2,7 @@
 Class Jeu
 Martin Timeo, Braz Arno
 19/10/25
-TODO Supprimer la frame (a priori) inutile -> ligne 25 et 51
+TODO : DocString
 '''
 import tkinter as tk
 from time import perf_counter

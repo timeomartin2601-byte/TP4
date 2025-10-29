@@ -2,6 +2,7 @@
 Classe Frame d'information
 Braz Arno, Martin Timeo
 16/10/25
+TODO : Faire les DocStrings
 '''
 import tkinter as tk
 
@@ -37,9 +38,6 @@ class info:
         self.__btn_retour.pack(side='right',padx=5)
         self.__btn_rejouer = tk.Button(self.__frame_info, text='rejouer', command=fct_rejouer)
         self.__btn_rejouer.pack(side='right',padx=5)
-
-    # def nb_bouton(self):
-    #     return len([b for b in self.__frame_info if isinstance(b, tk.Button)])
     
     def detruire(self):
         self.__label_vies.destroy()
