@@ -46,6 +46,7 @@ vies = 1
 diff = None
 final_time=None
 score=0
+id_dernier_after = None
 
 
 def fenetre_menu():
@@ -55,6 +56,10 @@ def fenetre_menu():
 
     def retour_menu():
         ''' Renvoie le joueur au menu principal '''
+        global id_dernier_after
+        if id_dernier_after:
+            window.after_cancel(id_dernier_after)
+            id_dernier_after = None
         frame_info.detruire()
         frame_canvas.destruction()
         fenetre_menu()
@@ -64,8 +69,12 @@ def fenetre_menu():
         ''' Initialisation de la fenêtre de jeu, des paramètres et des objets '''
 
         # Paramètrages des variables globales
-        global canvas, raquette, balle, blocs, vies, diff, frame_canvas,parametre,score,chrono
+        global canvas, raquette, balle, blocs, vies, diff, frame_canvas, parametre, score, chrono, id_dernier_after
         
+        if id_dernier_after:
+            window.after_cancel(id_dernier_after)
+            id_dernier_after = None
+
         if frame_info.btn_presents():
             frame_info.detruire()
 
@@ -122,7 +131,7 @@ def fenetre_menu():
         Gestion des événements liés au jeu
         Sortie : None, arrêt du jeu
         '''
-        global canvas, raquette, balle, blocs, vies,final_time,chrono,score
+        global canvas, raquette, balle, blocs, vies, final_time, chrono, score, id_dernier_after
         if blocs.vide():
             #Calcul du temps de jeu
             enregistrement_chrono()
@@ -159,7 +168,7 @@ def fenetre_menu():
                 menu_fin('GAME OVER')
 
                 return
-            window.after(1000, jeu)
+            id_dernier_after = window.after(1000, jeu)
         else:
             if idbloc!= 0 and len(idbloc)>0:
                 for obj in idbloc : 
@@ -168,7 +177,7 @@ def fenetre_menu():
             update()
             balle.deplacement()
             raquette.mouv()
-            window.after(10, jeu)
+            id_dernier_after = window.after(10, jeu)
 
     window.bind("<KeyPress>", mouvement)
     window.bind("<KeyRelease>", stop)
