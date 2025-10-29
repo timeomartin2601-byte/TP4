@@ -10,8 +10,8 @@ from ast import literal_eval
 
 class lemenu :
     def __init__(self, fenetre):
-        self.__vies = 3
-        self.__diff = 2
+        self.__vies = 1
+        self.__diff = 1
         self.__win = fenetre
         self.__vies_var = tk.IntVar(value=self.__vies)
         self.__diff_var = tk.IntVar(value=self.__diff)

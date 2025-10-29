@@ -37,23 +37,6 @@ window.geometry(f'700x800+{int((largeur/2)-350)}+{int((hauteur/2)-400)}')
 
 frame_info = Frame_Info.info(window)
 
-# frame_info = tk.Frame(window, width=700, height=200, bg='grey')
-
-# frame_info.pack(fill='both')
-
-# label_vies=tk.Label(frame_info, text='Nombre de vie : ',fg='white',bg='black')
-# label_vies.pack(side='left')
-
-# label_timer=tk.Label(frame_info, text='chrono : ',fg='white',bg='black')
-# label_timer.pack(side='left')
-
-# label_score=tk.Label(frame_info, text='score : ',fg='white',bg='black')
-# label_score.pack(side='left')
-
-# btn_close = tk.Button(frame_info, text="X", command=window.destroy)
-# btn_close.pack(side='right')
-
-
 # Initialisation des variables globales
 canvas = None
 raquette = None
@@ -71,8 +54,7 @@ def fenetre_menu():
     menu = Menu.lemenu(window)
 
     def retour_menu():
-        if frame_info.btn_presents():
-            frame_info.detruire()
+        frame_info.detruire()
         frame_canvas.destruction()
         fenetre_menu()
 
@@ -137,6 +119,8 @@ def fenetre_menu():
             enregistrement_score()
 
             #detruit le canvas de jeu et affiche le menu de fin 
+            frame_info.detruire()
+            frame_canvas.destruction()
             menu_fin('VICTOIRE')
 
             return
@@ -158,6 +142,8 @@ def fenetre_menu():
                 enregistrement_score()
 
                 #detruit le canvas de jeu et affiche le menu de fin 
+                frame_info.detruire()
+                frame_canvas.destruction()
                 menu_fin('GAME OVER')
 
                 return
