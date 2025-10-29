@@ -6,7 +6,7 @@ TODO :  - Gestion des vies -> ok
         - Prévoir un bouton rejouer à la fin -> ok
         - Idéalement remplacer un max de forme par des images pour que ce soit plus beau et agréable à jouer
         - label timer,vies -> ok 
-        - Gérer le bug du bouton rejouer qui survient à son utilisation pendant la partie
+        - Gérer le bug du bouton rejouer qui survient à son utilisation pendant la partie -> ok
 '''
 
 # Importation des modules et des classes
