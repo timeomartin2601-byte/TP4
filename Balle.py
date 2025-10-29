@@ -10,15 +10,12 @@ class laballe :
     def __init__(self, canvas, palet, x=330, y=380, diametre=20): 
         '''
         Création de la balle, sauvegarde de son identifiant, création de ses paramètres coordonnées et vitesse (Par défaut : balle 40x40 px)
-        TODO : vitesse croissante et initialisation aléatoire par exemple
         '''
         self.__palet = palet
         self.__canvas = canvas
         self.__balle = self.__canvas.create_oval(x, y, x+diametre, y+diametre, fill = "red")
-        self.__rayon = diametre/2 #-> non ?
+        self.__rayon = diametre/2 
         self.__x0, self.__y0, self.__x1, self.__y1 = self.__canvas.coords(self.__balle)
-        # self.__vitx = randint(4, 8) * ((-1)**(randint(1, 2)))
-        # self.__vity = -(9-abs(self.__vitx))
         self.__vitx = 5
         self.__vity = -5
 
