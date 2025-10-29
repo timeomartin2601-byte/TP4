@@ -111,14 +111,13 @@ class lemenu :
             self.__btn_jouer.config(command=self.__fct_jouer)
 
     def suppr_autre_win(self):
-        '''
-        Détruit les fenêtres existantes à l'exception de la frame info
-        '''
+        ''' Détruit les fenêtres existantes à l'exception de la frame info '''
         if len(self.__win.winfo_children()) > 1:
             for frame in self.__win.winfo_children()[1:]:
                 frame.destroy()
 
     def frame(self):
+        ''' Renvoie la tkinter Frame du menu '''
         return self.__frame_menu
     
     def difficulte(self):
