@@ -2,7 +2,6 @@
 Class Jeu
 Martin Timeo, Braz Arno
 19/10/25
-TODO : DocString
 '''
 import tkinter as tk
 from time import perf_counter
