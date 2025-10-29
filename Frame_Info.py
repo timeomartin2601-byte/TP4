@@ -17,6 +17,7 @@ class info:
 
         btn_close = tk.Button(self.__frame_info, text="X", command=window.destroy)
         btn_close.pack(side='right',padx=5)
+        btn_close.pack(side='right',padx=(5,0))
 
         self.__btn_retour = None
         self.__btn_rejouer = None
