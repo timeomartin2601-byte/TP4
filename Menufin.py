@@ -24,7 +24,7 @@ class lemenu_fin:
         couleur_du_titre ="#c91616"
         couleur_police = "#ffffff"
         police_titre=('Helvetica', 30, 'bold')
-        police_sous_titre=('Helvetica', 15, 'bold')
+        police_sous_titre=('Helvetica', 16, 'bold')
         police_val=('Helvetica', 12, 'bold')
 
 
@@ -67,17 +67,17 @@ class lemenu_fin:
         self.__Label_Chrono_valeur.pack(side='left')
 
 
-        #Meilleurs scores et chrono
+        #Meilleurs scores/chronos
         self.__stat_frame_record = ttk.Frame(self.__Frame_fin, style='Menu.TFrame')
-        self.__stat_frame_record.pack(pady=(20,0))
+        self.__stat_frame_record.pack(pady=(20,10))
 
         # En-tête principal
-        ttk.Label(self.__stat_frame_record, text='Meilleurs Records', style='vies.TLabel').grid(row=0, column=0, columnspan=3, pady=20)
+        ttk.Label(self.__stat_frame_record, text='Meilleurs Records', style='sous_titre.TLabel').grid(row=0, column=0, columnspan=3, pady=20)
         
         # En-têtes de colonnes
-        ttk.Label(self.__stat_frame_record, text='Position', style='vies.TLabel').grid(row=1, column=0, padx=40)
-        ttk.Label(self.__stat_frame_record, text='Score', style='vies.TLabel').grid(row=1, column=1, padx=40)
-        ttk.Label(self.__stat_frame_record, text='Chrono', style='vies.TLabel').grid(row=1, column=2, padx=40)
+        ttk.Label(self.__stat_frame_record, text='Position', style='sous_titre.TLabel').grid(row=1, column=0, padx=40)
+        ttk.Label(self.__stat_frame_record, text='Score', style='sous_titre.TLabel').grid(row=1, column=1, padx=40)
+        ttk.Label(self.__stat_frame_record, text='Chrono', style='sous_titre.TLabel').grid(row=1, column=2, padx=40)
 
         for i, (score, chrono) in enumerate(self.__meilleurs_perf):
             # rang (colonne 0)
@@ -89,9 +89,9 @@ class lemenu_fin:
 
 
 
-        #Historique
+        #Historique scores/chronos
         self.__stat_frame_historique = ttk.Frame(self.__Frame_fin, style='Menu.TFrame')
-        self.__stat_frame_historique.pack(pady=(20,0))
+        self.__stat_frame_historique.pack(pady=(20,10))
 
         # En-tête principal
         ttk.Label(self.__stat_frame_historique, text='Historique des Parties', style='vies.TLabel').grid(row=0, column=0, columnspan=3, pady=20)
@@ -118,8 +118,8 @@ class lemenu_fin:
         '''
         self.__Frame_bouton=ttk.Frame(self.__Frame_fin,style='Menu.TFrame')
         self.__Frame_bouton.pack(pady=20)
-        ttk.Button(self.__Frame_bouton,text='retour menu' ,command=fct_retour,style='jouer.TButton').grid(row=0,column=0,padx=10)
-        ttk.Button(self.__Frame_bouton,text='rejouer' ,command=fct_rejouer,style='jouer.TButton').grid(row=0,column=1,padx=10)
+        ttk.Button(self.__Frame_bouton,text='retour menu' ,command=fct_retour,style='jouer.TButton').grid(row=0,column=0,padx=10,pady=20)
+        ttk.Button(self.__Frame_bouton,text='rejouer' ,command=fct_rejouer,style='jouer.TButton').grid(row=0,column=1,padx=10,pady=20)
 
 
     def text_titre(self,titre='ERREUR'):
@@ -160,5 +160,5 @@ class lemenu_fin:
             self.__meilleurs_perf[i].append(self.__donnée_list[3][difficulté-1][i])
 
             self.__historique_perf[i].append(self.__donnée_list[0][difficulté-1][-1-i])
-            self.__historique_perf[i].append(self.__donnée_list[2][difficulté-1][i])
+            self.__historique_perf[i].append(self.__donnée_list[2][difficulté-1][-1-i])
 
