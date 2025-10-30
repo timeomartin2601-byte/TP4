@@ -8,17 +8,17 @@ Le [***github***](https://github.com/timeomartin2601-byte/TP4/tree/V4) du projet
 # 📜 Règles du Jeu
 L'objectif du Casse-Brique est de détruire tous les blocs affichés en haut de l'écran à l'aide d'une balle.
 
-## * Contrôles :
+## - Contrôles :
 
 Utilisez les flèches directionnelles Gauche et Droite pour déplacer la raquette (ou palet) horizontalement en bas de l'écran.  
 Le mouvement de la raquette s'arrête lorsque vous relâchez la touche.
 
-## * Objectif :
+## - Objectif :
 
 Vous devez faire rebondir la balle sur votre raquette pour l'envoyer sur les blocs en haut de l'écran.  
 La partie est gagnée lorsque tous les blocs ont été détruits.
 
-## * Mécaniques de Jeu :
+## - Mécaniques de Jeu :
 
   * Vies : Vous commencez avec un nombre de vies défini dans le menu (de 1 à 5). Vous perdez une vie si la balle tombe sous votre raquette et touche le bas de l'écran.
 
