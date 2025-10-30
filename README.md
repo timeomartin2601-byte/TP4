@@ -10,36 +10,36 @@ L'objectif du Casse-Brique est de détruire tous les blocs affichés en haut de 
 
 ## Contrôles :
 
-    Utilisez les flèches directionnelles Gauche (<Left>) et Droite (<Right>) pour déplacer la raquette (le "palet") horizontalement en bas de l'écran.
+Utilisez les flèches directionnelles Gauche (<Left>) et Droite (<Right>) pour déplacer la raquette (le "palet") horizontalement en bas de l'écran.
 
-    Le mouvement de la raquette s'arrête lorsque vous relâchez la touche.
+Le mouvement de la raquette s'arrête lorsque vous relâchez la touche.
 
 ## Objectif :
 
-    Vous devez faire rebondir la balle sur votre raquette pour l'envoyer sur les blocs en haut de l'écran.
-    La partie est gagnée lorsque tous les blocs ont été détruits.
+Vous devez faire rebondir la balle sur votre raquette pour l'envoyer sur les blocs en haut de l'écran.
+La partie est gagnée lorsque tous les blocs ont été détruits.
 
 ## Mécaniques de Jeu :
 
-    Vies : Vous commencez avec un nombre de vies défini dans le menu (de 1 à 5). Vous perdez une vie si la balle tombe sous votre raquette et touche le bas de l'écran.
+* Vies : Vous commencez avec un nombre de vies défini dans le menu (de 1 à 5). Vous perdez une vie si la balle tombe sous votre raquette et touche le bas de l'écran.
 
-    Game Over : La partie est perdue lorsque vous n'avez plus de vies.
+* Game Over : La partie est perdue lorsque vous n'avez plus de vies.
 
-    Blocs : Selon le niveau de difficulté (de 1 à 3), les blocs peuvent nécessiter plusieurs coups pour être détruits. Leur couleur change pour indiquer leur état (bleu, orange puis rouge) avant de disparaître.
+* Blocs : Selon le niveau de difficulté (de 1 à 3), les blocs peuvent nécessiter plusieurs coups pour être détruits. Leur couleur change pour indiquer leur état (bleu, orange puis rouge) avant de disparaître.
 
-    Angle de Rebond : L'endroit où la balle frappe la raquette influe sur l'angle de rebond. Frapper la balle avec le centre de la raquette la renvoie plus verticalement, tandis que les bords la renvoient avec un angle plus aigu. Attention cela affecte également la vitesse, il faut donc être réactif !
+* Angle de Rebond : L'endroit où la balle frappe la raquette influe sur l'angle de rebond. Frapper la balle avec le centre de la raquette la renvoie plus verticalement, tandis que les bords la renvoient avec un angle plus aigu. Attention cela affecte également la vitesse, il faut donc être réactif !
 
-    Score : Votre score augmente en cassant des blocs. Il diminue si vous perdez une vie. Le temps (chrono) est également pris en compte dans le calcul du score final (plus vous êtes rapide, meilleur est le score).
+* Score : Votre score augmente en cassant des blocs. Il diminue si vous perdez une vie. Le temps (chrono) est également pris en compte dans le calcul du score final (plus vous êtes rapide, meilleur est le score).
 
 # 🕹️ Fonctionnalités
-    Menu Principal : Permet de régler le nombre de vies (1 à 5) et le niveau de difficulté (1 à 3) avant de lancer une partie.
+* Menu Principal : Permet de régler le nombre de vies (1 à 5) et le niveau de difficulté (1 à 3) avant de lancer une partie.
 
-    Système de Score : Calcule le score en temps réel en fonction des blocs cassés, des vies perdues et du temps écoulé.
+* Système de Score : Calcule le score en temps réel en fonction des blocs cassés, des vies perdues et du temps écoulé.
 
-    Chronomètre : Un chronomètre enregistre la durée de votre partie.
+* Chronomètre : Un chronomètre enregistre la durée de votre partie.
 
-    Persistance des Données : Les meilleurs scores et les chronos, ainsi que l'historique récent des parties, sont sauvegardés dans un fichier data.txt.
+* Persistance des Données : Les meilleurs scores et les chronos, ainsi que l'historique récent des parties, sont sauvegardés dans un fichier data.txt.
 
-    Écrans de Fin : Des écrans de "VICTOIRE" ou "GAME OVER" s'affichent à la fin de la partie, récapitulant votre performance et affichant les classements.
+* Écrans de Fin : Des écrans de "VICTOIRE" ou "GAME OVER" s'affichent à la fin de la partie, récapitulant votre performance et affichant les classements.
 
-    Contrôles en Jeu : Possibilité de "Rejouer" (relance une partie avec les mêmes réglages) ou de "Retour Menu" à tout moment.
+* Contrôles en Jeu : Possibilité de "Rejouer" (relance une partie avec les mêmes réglages) ou de "Retour Menu" à tout moment.
