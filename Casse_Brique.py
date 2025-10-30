@@ -198,7 +198,6 @@ def fenetre_menu():
         menu_fin.text_titre(f'{message}')
         menu_fin.nbr_chrono(chrono.le_chrono())
         menu_fin.nbr_score(score.le_score(chrono.le_chrono()))
-        menu_fin.restart(retour_menu,initialisation)
 
     def enregistrement_score():
         ''' Calcul et enregistrement du score final '''
