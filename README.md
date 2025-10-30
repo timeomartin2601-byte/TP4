@@ -1,7 +1,7 @@
 # ℹ️ Informations
 Ce projet a été réalisé par [**Martin Timeo**](https://github.com/timeomartin2601-byte) et [**Braz Arno**](https://github.com/ArnoBraz) depuis le **9/10/2025**.
 
-Ci-contre le ***github*** du projet : https://github.com/timeomartin2601-byte/TP4/tree/V4 
+Ci-contre le ***github*** du projet : https://github.com/timeomartin2601-byte/TP4/tree/Rendue-Final
 
 ***Casse-Brique***: Le joueur contrôle une raquette pour faire rebondir une balle et détruire tous les blocs présents à l'écran, tout en gérant son score, son temps et ses vies.
 
