@@ -10,13 +10,13 @@ L'objectif du Casse-Brique est de détruire tous les blocs affichés en haut de 
 
 ## Contrôles :
 
-Utilisez les flèches directionnelles Gauche (<Left>) et Droite (<Right>) pour déplacer la raquette (le "palet") horizontalement en bas de l'écran.
+Utilisez les flèches directionnelles Gauche (<Left>) et Droite (<Right>) pour déplacer la raquette (le "palet") horizontalement en bas de l'écran.  
 
 Le mouvement de la raquette s'arrête lorsque vous relâchez la touche.
 
 ## Objectif :
 
-Vous devez faire rebondir la balle sur votre raquette pour l'envoyer sur les blocs en haut de l'écran.
+Vous devez faire rebondir la balle sur votre raquette pour l'envoyer sur les blocs en haut de l'écran.  
 La partie est gagnée lorsque tous les blocs ont été détruits.
 
 ## Mécaniques de Jeu :
