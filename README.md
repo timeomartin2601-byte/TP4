@@ -42,3 +42,8 @@ La partie est gagnée lorsque tous les blocs ont été détruits.
 * Écrans de Fin : Des écrans de "VICTOIRE" ou "GAME OVER" s'affichent à la fin de la partie, récapitulant votre performance et affichant les classements.
 
 * Contrôles en Jeu : Possibilité de "Rejouer" (relance une partie avec les mêmes réglages) ou de "Retour Menu" à tout moment.  
+
+# ⚙️ Environnement
+* Python 3.12+
+* Bibliothèque Tkinter
+* Pour lancer le jeu : executer le fichier *Casse_Brique.py*
