@@ -8,6 +8,8 @@ from ast import literal_eval
 
 class lechrono:
     def __init__(self):
+        ''' Initialisation de l'objet chronomètre et de ses variables '''
+        self.__start_time=0
 
         self.__start_time=0
         self.__end_time=0
@@ -76,9 +78,7 @@ class lechrono:
         self.__donnée_str.close()
 
     def memorisation(self):
-        '''
-        modifie le fichier data.txt
-        '''
+        ''' Enregistre dans Data le nouveau chrono '''
         donnée_str = open("data.txt", "w")
         donnée_str.write( str([self.__donnée_list[0],self.__donnée_list[1],self.__historique_chrono,self.__meilleurs_chrono]))
         donnée_str.close()

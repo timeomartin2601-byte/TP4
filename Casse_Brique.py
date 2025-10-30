@@ -74,15 +74,18 @@ def fenetre_menu():
         if frame_info.btn_presents():
             frame_info.detruire()
 
-        # Defini le nombre de vie et la difficulté et le garde en memoire en vue d'une nouvelle game sans passer par le menu principale
+        # Defini le nombre de vie et la difficulté et le garde en memoire en vue d'une nouvelle game sans passer par le menu principal
         if menu.existe():
-            vies = menu.nb_vies()
+            nombre_vies = menu.nb_vies()
             diff = menu.difficulte() 
-            parametre=[vies,diff]
+            parametre=[nombre_vies, diff]
         else:
-            vies=parametre[0]
+            nombre_vies=parametre[0]
             diff=parametre[1]
             
+        vies = []
+        for vie in range(nombre_vies):
+            vies.append("vie")
         
         frame_canvas = Jeu.jeu(window, vies)
         canvas = frame_canvas.lecanvas()
@@ -147,7 +150,7 @@ def fenetre_menu():
             return
         idbloc = balle.id_col()
         if idbloc == -1:
-            vies -= 1
+            vies.pop()
 
             score.mort()
             update()
@@ -155,7 +158,7 @@ def fenetre_menu():
             balle.del_balle()
             balle=Balle.laballe(canvas, raquette.id_palet())
 
-            if vies <= 0:
+            if vies == []:
                 #Calcul du temps de jeu (le chrono n'est pas enregistrer car le joueur a perdu)
                 chrono.time()
                 chrono.le_chrono()
@@ -187,7 +190,7 @@ def fenetre_menu():
     def update():
         ''' Rafraichie les labels 'label_vies' et 'label_timer' '''
         global vies,chrono,blocs,score
-        frame_info.update_labels(vies, chrono.le_chrono(), score.le_score(chrono.le_chrono()))
+        frame_info.update_labels(len(vies), chrono.le_chrono(), score.le_score(chrono.le_chrono()))
 
     def menu_fin(message):
         ''' Detruit le canvas de jeu et affiche le menu de fin

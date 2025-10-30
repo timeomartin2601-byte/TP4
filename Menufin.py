@@ -8,7 +8,11 @@ from ast import literal_eval
 
 class lemenu_fin:
     def __init__(self,fenetre,difficulté):
-
+        
+        ''' Initialisation de l'objet menu de fin et des ses variables
+        Entrée : fenetre - tkinter Frame, fenêtre d'événements tkinter
+                 difficulté - int, difficulté préalablement sélectionné par le joueur '''
+        
         #recuperation de l'historique des scores/chrono et des meilleurs scores/chrono
         self.__meilleurs_perf = [[],[],[]]
         self.__historique_perf = [[],[],[]]

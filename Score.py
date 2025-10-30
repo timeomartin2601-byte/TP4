@@ -5,13 +5,9 @@ Braz Arno, Martin Timeo
 '''
 from ast import literal_eval
 
-
 class lescore:
-
     def __init__(self):
-        '''
-        Initialisation des variable lié au score
-        '''
+        ''' Initialisation de l'objet score et des ses variables '''
         self.__score=0
         self.__historique_score=list()
         self.__meilleurs_score=list()
@@ -79,9 +75,7 @@ class lescore:
         self.__donnée_str.close()
 
     def memorisation(self):
-        '''
-        modifie le fichier data.txt
-        '''
+        ''' Inscrit dans Data le nouveau score '''
         donnée_str = open("data.txt", "w")
         donnée_str.write(str([self.__historique_score,self.__meilleurs_score,self.__donnée_list[2],self.__donnée_list[3]]))
         donnée_str.close()
