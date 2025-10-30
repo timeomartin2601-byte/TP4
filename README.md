@@ -6,7 +6,6 @@ Ci-contre le ***github*** du projet : https://github.com/timeomartin2601-byte/TP
 ***Casse-Brique***: Le joueur contrôle une raquette pour faire rebondir une balle et détruire tous les blocs présents à l'écran, tout en gérant son score, son temps et ses vies.
 
 # 📜 Règles du Jeu
-=============
 L'objectif du Casse-Brique est de détruire tous les blocs affichés en haut de l'écran à l'aide d'une balle.
 
 ## Contrôles :
@@ -32,7 +31,6 @@ La partie est gagnée lorsque tous les blocs ont été détruits.
 * Score : Votre score augmente en cassant des blocs. Il diminue si vous perdez une vie. Le temps (chrono) est également pris en compte dans le calcul du score final (plus vous êtes rapide, meilleur est le score).
 
 # 🕹️ Fonctionnalités
-=============
 * Menu Principal : Permet de régler le nombre de vies (1 à 5) et le niveau de difficulté (1 à 3) avant de lancer une partie.
 
 * Système de Score : Calcule le score en temps réel en fonction des blocs cassés, des vies perdues et du temps écoulé.
