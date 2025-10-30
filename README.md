@@ -30,3 +30,16 @@ L'objectif du Casse-Brique est de détruire tous les blocs affichés en haut de 
     Angle de Rebond : L'endroit où la balle frappe la raquette influe sur l'angle de rebond. Frapper la balle avec le centre de la raquette la renvoie plus verticalement, tandis que les bords la renvoient avec un angle plus aigu. Attention cela affecte également la vitesse, il faut donc être réactif !
 
     Score : Votre score augmente en cassant des blocs. Il diminue si vous perdez une vie. Le temps (chrono) est également pris en compte dans le calcul du score final (plus vous êtes rapide, meilleur est le score).
+
+# 🕹️ Fonctionnalités
+    Menu Principal : Permet de régler le nombre de vies (1 à 5) et le niveau de difficulté (1 à 3) avant de lancer une partie.
+
+    Système de Score : Calcule le score en temps réel en fonction des blocs cassés, des vies perdues et du temps écoulé.
+
+    Chronomètre : Un chronomètre enregistre la durée de votre partie.
+
+    Persistance des Données : Les meilleurs scores et les chronos, ainsi que l'historique récent des parties, sont sauvegardés dans un fichier data.txt.
+
+    Écrans de Fin : Des écrans de "VICTOIRE" ou "GAME OVER" s'affichent à la fin de la partie, récapitulant votre performance et affichant les classements.
+
+    Contrôles en Jeu : Possibilité de "Rejouer" (relance une partie avec les mêmes réglages) ou de "Retour Menu" à tout moment.
