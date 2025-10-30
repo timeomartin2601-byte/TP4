@@ -103,11 +103,11 @@ class lemenu_fin:
             # Chrono (colonne 2)
             ttk.Label(self.__stat_frame_historique, text=f'{round(chrono,2)} s', style='statue_val.TLabel').grid(row=i + 2, column=2, pady=5, padx=55)
 
-
+    def restart(self,fct_retour,fct_rejouer):
         self.__Frame_bouton=ttk.Frame(self.__Frame_fin,style='Menu.TFrame')
         self.__Frame_bouton.pack(pady=20)
         ttk.Button(self.__Frame_bouton,text='retour menu' ,command=fct_retour,style='jouer.TButton').grid(row=0,column=0,padx=10)
-
+        ttk.Button(self.__Frame_bouton,text='rejouer' ,command=fct_rejouer,style='jouer.TButton').grid(row=0,column=1,padx=10)
 
     def text_titre(self,titre='ERREUR'):
         self.__Label_titre.config(text=f'{titre}')
