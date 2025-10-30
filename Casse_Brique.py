@@ -2,11 +2,7 @@
 Casse-Brique : Programme principal
 Braz Arno, Martin Timeo
 16/10/25
-TODO :  - Gestion des vies -> ok
-        - Prévoir un bouton rejouer à la fin -> ok
-        - Idéalement remplacer un max de forme par des images pour que ce soit plus beau et agréable à jouer
-        - label timer,vies -> ok 
-        - Gérer le bug du bouton rejouer qui survient à son utilisation pendant la partie -> ok
+TODO : - Idéalement remplacer un max de forme par des images pour que ce soit plus beau et agréable à jouer
 '''
 
 # Importation des modules et des classes
@@ -50,7 +46,7 @@ id_dernier_after = None
 
 
 def fenetre_menu():
-    ''' Création du menu '''
+    ''' Création du menu, permet de recreer le Menu principale ultérieurement'''
 
     menu = Menu.lemenu(window)
 
@@ -132,6 +128,10 @@ def fenetre_menu():
         Sortie : None, arrêt du jeu
         '''
         global canvas, raquette, balle, blocs, vies, final_time, chrono, score, id_dernier_after
+
+        chrono.time()
+        chrono.le_chrono()
+
         if blocs.vide():
             #Calcul du temps de jeu
             enregistrement_chrono()
@@ -157,7 +157,8 @@ def fenetre_menu():
 
             if vies <= 0:
                 #Calcul du temps de jeu (le chrono n'est pas enregistrer car le joueur a perdu)
-                chrono.stop_time()
+                chrono.time()
+                chrono.le_chrono()
 
                 #calcul et memorisation du score final 
                 enregistrement_score()
@@ -189,12 +190,15 @@ def fenetre_menu():
         frame_info.update_labels(vies, chrono.le_chrono(), score.le_score(chrono.le_chrono()))
 
     def menu_fin(message):
-        ''' Detruit le canvas de jeu et affiche le menu de fin ''' 
+        ''' Detruit le canvas de jeu et affiche le menu de fin
+            Parametre message : type str, Soit GAME OVER soit VICTOIRE
+        ''' 
         frame_canvas.destruction()
         menu_fin=Menufin.lemenu_fin(window,diff)
         menu_fin.text_titre(f'{message}')
         menu_fin.nbr_chrono(chrono.le_chrono())
         menu_fin.nbr_score(score.le_score(chrono.le_chrono()))
+        menu_fin.restart(retour_menu,initialisation)
 
     def enregistrement_score():
         ''' Calcul et enregistrement du score final '''
@@ -205,7 +209,8 @@ def fenetre_menu():
 
     def enregistrement_chrono():
         ''' Calcul et enregistrement du chrono '''
-        chrono.stop_time()
+        chrono.time()
+        chrono.le_chrono()
         chrono.recup_donnée()
         chrono.historique_chrono1(diff)
         chrono.classement_chrono1(diff)

@@ -65,6 +65,9 @@ class info:
     def update_labels(self, vies, chrono, score):
         '''
         La fonction met à jour les labels à chaque appel
+        parametre : - vies : entier compris entre 1 et 5
+                    - chrono : float positif
+                    - score : float 
         '''
         self.__label_vies.config(text='Nombre de vie : ' + str(vies))
         self.__label_timer.config(text='chrono : ' + str(round(chrono, 2)) + 's')
