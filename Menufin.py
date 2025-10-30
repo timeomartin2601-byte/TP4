@@ -8,7 +8,9 @@ from ast import literal_eval
 
 class lemenu_fin:
     def __init__(self,fenetre,difficulté):
-
+        ''' Initialisation de l'objet menu de fin et des ses variables
+        Entrée : fenetre - tkinter Frame, fenêtre d'événements tkinter
+                 difficulté - int, difficulté préalablement sélectionné par le joueur '''
         self.__meilleurs_scores = [[],[],[]]
         self.__historique_scores = [[],[],[]]
         self.recup_donnée(difficulté)
@@ -104,21 +106,26 @@ class lemenu_fin:
             ttk.Label(self.__stat_frame_historique, text=f'{round(chrono,2)} s', style='statue_val.TLabel').grid(row=i + 2, column=2, pady=5, padx=55)
 
     def restart(self,fct_retour,fct_rejouer):
+        ''' Création des boutons rejouer et retour menu '''
         self.__Frame_bouton=ttk.Frame(self.__Frame_fin,style='Menu.TFrame')
         self.__Frame_bouton.pack(pady=20)
         ttk.Button(self.__Frame_bouton,text='retour menu' ,command=fct_retour,style='jouer.TButton').grid(row=0,column=0,padx=10)
         ttk.Button(self.__Frame_bouton,text='rejouer' ,command=fct_rejouer,style='jouer.TButton').grid(row=0,column=1,padx=10)
 
     def text_titre(self,titre='ERREUR'):
+        ''' Affiche le texte en fonction de la performance du joueur '''
         self.__Label_titre.config(text=f'{titre}')
 
     def nbr_score(self,score=-1):
+        ''' Affiche le score du joueur sur la dernière partie '''
         self.__Label_Score_valeur.config(text=f'{score}')
 
     def nbr_chrono(self,chrono=-1):
+        ''' Affiche le chronomètre du joueur sur la dernière partie '''
         self.__Label_Chrono_valeur.config(text=f'{chrono}')
 
     def recup_donnée(self,difficulté):
+        ''' Récupère les données des meilleurs et dernières sessions dans Data '''
         self.__donnée_str = open("data.txt", "r")
         self.__donnée_list=literal_eval("".join(list(self.__donnée_str)))
         for i in range(3):
