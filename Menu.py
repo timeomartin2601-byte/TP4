@@ -26,8 +26,8 @@ class lemenu :
         # Styles de base
         couleur_fond = "#302f2f" 
         couleur_police = '#ffffff'
-        police_titre=('Helvetica', 20, 'bold')
-        police_sous_titre=('Helvetica', 15, 'bold')
+        police_titre=('Helvetica', 30, 'bold')
+        police_sous_titre=('Helvetica', 16, 'bold')
         police_val=('Helvetica', 12, 'bold')
 
         # Configuration des styles
@@ -42,28 +42,28 @@ class lemenu :
         self.__frame_menu.pack(fill='both', expand=True)
 
         # Titre
-        ttk.Label(self.__frame_menu, text='Jeu du Casse-Brique', style='Titre.TLabel').pack(pady=(40, 20))
+        ttk.Label(self.__frame_menu, text='Jeu du Casse-Brique', style='Titre.TLabel').pack(pady=40)
 
         # Nombre de vies
-        ttk.Label(self.__frame_menu, text='Nombre de vies (1 à 5) :',style='vies.TLabel').pack(pady=(10, 5))
+        ttk.Label(self.__frame_menu, text='Nombre de vies (1 à 5) :',style='vies.TLabel').pack(pady=10)
 
         vies_frame = ttk.Frame(self.__frame_menu, style='Menu.TFrame')
         vies_frame.pack(pady=(0, 20))
 
         self.__vies_slider = ttk.Scale(vies_frame,from_=1,to=5,variable=self.__vies_var,command=self.update_vies_label,length=200)
-        self.__vies_slider.pack(side='left', padx=10)
+        self.__vies_slider.pack(side='left', padx=15,pady=5)
 
         self.__vies_label = ttk.Label(vies_frame, textvariable=self.__vies_var, style='statue_val.TLabel')
         self.__vies_label.pack(side='left')
 
         # Niveau de difficulté
-        ttk.Label(self.__frame_menu, text='Niveau de difficulté (1 à 3) :',style='vies.TLabel').pack(pady=(10, 5))
+        ttk.Label(self.__frame_menu, text='Niveau de difficulté (1 à 3) :',style='vies.TLabel').pack(pady=10)
 
         diff_frame = ttk.Frame(self.__frame_menu, style='Menu.TFrame')
         diff_frame.pack(pady=(0, 20))
 
         self.__diff_slider = ttk.Scale(diff_frame,from_=1,to=3,variable=self.__diff_var,command=self.update_diff_label,length=200)
-        self.__diff_slider.pack(side='left', padx=10)
+        self.__diff_slider.pack(side='left', padx=15,pady=5)
 
         self.__diff_label = ttk.Label(diff_frame, textvariable=self.__diff_var, style='statue_val.TLabel')
         self.__diff_label.pack(side='left')
@@ -87,11 +87,11 @@ class lemenu :
 
         for i, (difficulté,score, chrono) in enumerate(self.__meilleurs_scores):
             # difficulté (colonne 0)
-            ttk.Label(stat_frame, text=f'{difficulté} ({i+1})', style='statue_val.TLabel').grid(row=i + 1, column=0, pady=5,padx=45)
+            ttk.Label(stat_frame, text=f'{difficulté} ({i+1})', style='statue_val.TLabel').grid(row=i + 1, column=0, pady=5, padx=40)
             # Score (colonne 1)
-            ttk.Label(stat_frame, text=f'{score}', style='statue_val.TLabel').grid(row=i + 1, column=1, pady=5,padx=55)
+            ttk.Label(stat_frame, text=f'{score}', style='statue_val.TLabel').grid(row=i + 1, column=1, pady=5,padx=(50,50))
             # Chrono (colonne 2)
-            ttk.Label(stat_frame, text=f'{round(chrono,2)} s', style='statue_val.TLabel').grid(row=i + 1, column=2, pady=5, padx=55)
+            ttk.Label(stat_frame, text=f'{round(chrono,2)} s', style='statue_val.TLabel').grid(row=i + 1, column=2, pady=5, padx=40)
 
     def update_vies_label(self,val):
         ''' Mis à jour du Label vies à chaque appel de la fonction '''

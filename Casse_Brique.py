@@ -2,7 +2,6 @@
 Casse-Brique : Programme principal
 Braz Arno, Martin Timeo
 16/10/25
-TODO : - Idéalement remplacer un max de forme par des images pour que ce soit plus beau et agréable à jouer
 '''
 
 # Importation des modules et des classes
@@ -28,9 +27,9 @@ window.title('Casse-Brique')
 largeur = window.winfo_screenwidth()
 hauteur = window.winfo_screenheight()
 window.geometry(f'700x800+{int((largeur/2)-350)}+{int((hauteur/2)-400)}')
-# window.overrideredirect(True)
-# window.attributes('-fullscreen', True)
+window.overrideredirect(True)
 
+#Creation du bandereau
 frame_info = Frame_Info.info(window)
 
 # Initialisation des variables globales
