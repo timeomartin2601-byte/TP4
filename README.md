@@ -1,3 +1,4 @@
+# ℹ️ Informations
 Ce projet a été réalisé par **Martin Timeo** et **Braz Arno** depuis le **9/10/2025**.
 Ci-contre le ***github*** du projet : https://github.com/timeomartin2601-byte/TP4/tree/V4 
 ***Casse-Brique***: Le joueur contrôle une raquette pour faire rebondir une balle et détruire tous les blocs présents à l'écran, tout en gérant son score, son temps et ses vies.
