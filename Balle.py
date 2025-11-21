@@ -2,26 +2,25 @@
 Class Balle
 Martin Timeo, Braz Arno
 09/10/25
-TODO : Collisions diagonales + Fin du jeu pour y = 1080 (+ option de jeu sur les paramètres de vitesse)
 '''
 import tkinter as tk
 from random import randint
 
 class laballe : 
-    def __init__(self, canvas, pg, pd, x=330, y=380, diametre=20): 
+    def __init__(self, canvas, palet, x=330, y=380, diametre=20): 
         '''
         Création de la balle, sauvegarde de son identifiant, création de ses paramètres coordonnées et vitesse (Par défaut : balle 40x40 px)
-        TODO : vitesse croissante et initialisation aléatoire par exemple
         '''
-        self.__pg, self.__pd = pg, pd
+        self.__palet = palet
         self.__canvas = canvas
         self.__balle = self.__canvas.create_oval(x, y, x+diametre, y+diametre, fill = "red")
-        self.__rayon = diametre/2 #-> non ?
+        self.__rayon = diametre/2 
         self.__x0, self.__y0, self.__x1, self.__y1 = self.__canvas.coords(self.__balle)
-        # self.__vitx = randint(4, 8) * ((-1)**(randint(1, 2)))
-        # self.__vity = -(9-abs(self.__vitx))
         self.__vitx = 5
         self.__vity = -5
+
+        self.__vitesse_init = -5 
+        self.__facteur_angle = 8
 
     def id_col(self):
         '''
@@ -44,13 +43,12 @@ class laballe :
         id_bloc = []
 
         if len(ids_vertical) > 0:
-            if self.__pg in ids_vertical:
-                if self.__vitx > 0:
-                    self.__vitx = -self.__vitx
-            elif self.__pd in ids_vertical:
-                if self.__vitx < 0:
-                    self.__vitx = -self.__vitx
-            self.__vity = -self.__vity
+            if self.__palet in ids_vertical:  
+                d = self.contact_palet() 
+                self.__vity = self.__vitesse_init
+                self.__vitx = d * self.__facteur_angle
+            else:
+                self.__vity = -self.__vity
             id_bloc += ids_vertical
 
         if len(ids_horizontal) > 0:
@@ -63,6 +61,9 @@ class laballe :
         return id_bloc
         
     def deplacement(self):
+        '''
+        Déplace la balle sauf si le jeu est fini
+        '''
         if not self.arret():
             self.__canvas.move(self.__balle, self.__vitx, self.__vity)
     
@@ -102,3 +103,20 @@ class laballe :
         '''
         return not self.__balle in self.__canvas.find_all()
     
+    def contact_palet(self):
+        '''
+        Gestion des collision mais uniquement avec la raquette afin d'offrir plus de profondeur au jeu
+        Sortie : int ou float, la distance (normalisée entre -1 et 1) qui va servir de facteur pour le renvoie de la balle
+        '''
+        paletx0, palety0, paletx1, palety1 = self.__canvas.coords(self.__palet)
+        centre_palet = (paletx0+paletx1)/2
+        centre_balle = (self.__x0+self.__x1)/2
+        dist =  centre_balle-centre_palet
+        dist_norm = dist / ((paletx1-paletx0)/2)
+        
+        if -1 < dist_norm < 1:
+            return dist_norm
+        if dist_norm > 1 :
+            return 1
+        else:
+            return -1 
